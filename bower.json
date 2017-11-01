@@ -1,0 +1,24 @@
+{
+  "name": "graduation",
+  "description": "graduation thesis",
+  "main": "graduation thesis",
+  "authors": [
+    "thangnt"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "graduation",
+    "thesis"
+  ],
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.7"
+  }
+}
