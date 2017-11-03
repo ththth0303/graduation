@@ -17,9 +17,9 @@ Route::get('/', function () {
 Route::get('/task', function () {
     return view('tasks.index');
 });
-Route::get('/', function () {
-    return view('index');
+Route::get('/new', function () {
+    return view('news.index');
 });
-Route::get('/', function () {
-    return view('index');
+Route::get('/document', function () {
+    return view('documents.index');
 });

@@ -1,10 +1,11 @@
-@extends('layouts.master') @section('content')
-    <div class="col-sm-6" id="th">
+@extends('layouts.master')
+@section('content')
+    <div class="col-sm-12" id="th">
         <div class="white-box">
             <h3 class="box-title">Basic Table</h3>
             <p class="text-muted">Add class <code>.table</code></p>
             <div class="table-responsive">
-                <table class="table hover-table">
+                <table class="table table-bordered">
                     <thead>
                         <tr>
                             <th>#</th>
@@ -98,15 +99,22 @@
                     <div class="modal-body">
                         <form>
                             <div class="form-group">
-                                <label class="control-label" for="recipient-name">Recipient:</label> <input class="form-control" id="recipient-name" type="text">
+                                <label class="control-label" for="recipient-name">Description</label><br>
+                                <p>gfgjflgdl;gd;g</p>
+
                             </div>
                             <div class="form-group">
-                                <label class="control-label" for="message-text">Message:</label> 
-                                <textarea class="form-control" id="message-text"></textarea>
+                                <label class="control-label" for="recipient-name">File</label><br>
+                                <a href="">doan.docx</a>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label" for="recipient-name">Logs</label><br>
+                                <p>gfgfgfgfg
+                                gfgfgfgfgfg</p>
                             </div>
                         </form>
                     </div>
-                    <div data-target="#responsive-modal" data-toggle="modal">
+                    <div data-target="#responsive-modal" data-toggle="modal" class="btn btn-primary">
                         update
                     </div>
                     <div class="modal-footer">
@@ -125,7 +133,8 @@
                     <div class="modal-body">
                         <form>
                             <div class="form-group">
-                                <label class="control-label" for="recipient-name">Recipient:</label> <input class="form-control" id="recipient-name" type="text">
+                                <label class="control-label" for="recipient-name">% Done</label>
+                                <input class="form-control" id="recipient-name" type="text">
                             </div>
                             <div class="form-group">
                                 <label class="control-label" for="message-text">Message:</label> 
@@ -147,8 +156,7 @@
                el: '#th',
 
                mounted: function () {
-                   $('#modal1').modal('show');
-                   alert('thawngs')
+                   $('#responsive-modal1').modal('show');
                }
            });
     </script>
