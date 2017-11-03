@@ -123,26 +123,21 @@
     </div><!-- /#wrapper -->
     <!-- jQuery -->
     </script> 
-    <script src="bower_components/jquery/dist/jquery.min.js">
+    <script src="{{asset('bower_components/jquery/dist/jquery.min.js')}}">
+    </script>
+    <script src="{{asset('bower_components/bootstrap/dist/js/bootstrap.min.js')}}">
+    </script>
+    <script src="{{asset('bower_components/sidebar-nav/dist/sidebar-nav.min.js')}}">
+    </script>
+    <script src="{{asset('js/jquery.slimscroll.js')}}">
+    </script>
+    <script src="{{asset('js/waves.js')}}">
+    </script>
+    <script src="{{asset('js/custom.min.js')}}">
+    </script>
+    <script src="{{asset('bower_components/styleswitcher/jQuery.style.switcher.js')}}">
+    </script>
     </script> <!-- Bootstrap Core JavaScript -->
-     
-    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js">
-    </script> <!-- Menu Plugin JavaScript -->
-     
-    <script src="bower_components/sidebar-nav/dist/sidebar-nav.min.js">
-    </script> <!--slimscroll JavaScript -->
-     
-    <script src="js/jquery.slimscroll.js">
-    </script> <!--Wave Effects -->
-     
-    <script src="js/waves.js">
-    </script> <!-- Custom Theme JavaScript -->
-     
-    <script src="js/custom.min.js">
-    </script> <!--Style Switcher -->
-     
-    <script src="bower_components/styleswitcher/jQuery.style.switcher.js">
-    </script><!-- Mirrored from wrappixel.com/demos/admin-templates/pixeladmin/horizontal-nav-fullwidth/blank.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 01 Nov 2017 07:38:36 GMT -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.2/vue.js"></script>
     @yield('script')
 </body>
