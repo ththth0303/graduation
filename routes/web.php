@@ -12,5 +12,14 @@
 */
 
 Route::get('/', function () {
+    return view('index');
+});
+Route::get('/task', function () {
     return view('tasks.index');
+});
+Route::get('/', function () {
+    return view('index');
+});
+Route::get('/', function () {
+    return view('index');
 });
