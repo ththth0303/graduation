@@ -9,11 +9,11 @@
     <meta content="" name="author">
     <link href="../plugins/images/favicon.png" rel="icon" sizes="16x16" type="image/png">
     <title>Pixel Admin - Responsive Admin Dashboard Template build with Twitter Bootstrap</title><!-- Bootstrap Core CSS -->
-    <link href="{{asset('bower_components/bootstrap/dist/css/bootstrap.min.css')}}" rel="stylesheet"><!-- Menu CSS -->
-    <link href="{{asset('bower_components/sidebar-nav/dist/sidebar-nav.min.css')}}" rel="stylesheet"><!-- animation CSS -->
-    <link href="{{asset('css/animate.css')}}" rel="stylesheet"><!-- Custom CSS -->
-    <link href="{{asset('css/style.css')}}" rel="stylesheet"><!-- color CSS you can use different color css from css/colors folder -->
-    <link href="{{asset('css/colors/blue.css')}}" rel="stylesheet"><!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <link href="/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"><!-- Menu CSS -->
+    <link href="/bower_components/sidebar-nav/dist/sidebar-nav.min.css" rel="stylesheet"><!-- animation CSS -->
+    <link href="/css/animate.css" rel="stylesheet"><!-- Custom CSS -->
+    <link href="/css/style.css" rel="stylesheet"><!-- color CSS you can use different color css from css/colors folder -->
+    <link href="/css/colors/blue.css" rel="stylesheet"><!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -123,19 +123,19 @@
     </div><!-- /#wrapper -->
     <!-- jQuery -->
     </script> 
-    <script src="{{asset('bower_components/jquery/dist/jquery.min.js')}}">
+    <script src="bower_components/jquery/dist/jquery.min.js">
     </script>
-    <script src="{{asset('bower_components/bootstrap/dist/js/bootstrap.min.js')}}">
+    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js">
     </script>
-    <script src="{{asset('bower_components/sidebar-nav/dist/sidebar-nav.min.js')}}">
+    <script src="bower_components/sidebar-nav/dist/sidebar-nav.min.js">
     </script>
-    <script src="{{asset('js/jquery.slimscroll.js')}}">
+    <script src="js/jquery.slimscroll.js">
     </script>
-    <script src="{{asset('js/waves.js')}}">
+    <script src="js/waves.js">
     </script>
-    <script src="{{asset('js/custom.min.js')}}">
+    <script src="js/custom.min.js">
     </script>
-    <script src="{{asset('bower_components/styleswitcher/jQuery.style.switcher.js')}}">
+    <script src="bower_components/styleswitcher/jQuery.style.switcher.js">
     </script>
     </script> <!-- Bootstrap Core JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.2/vue.js"></script>
