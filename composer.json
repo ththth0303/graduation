@@ -45,7 +45,6 @@
         ],
         "deploy": [
             "php -r \"file_exists('.env') || copy('.env.example', '.env');\"",
-            "php artisan config:clear",
             "php artisan key:generate",
             "npm install"
         ],
@@ -59,10 +58,5 @@
             "php artisan optimize",
             "@deploy"
         ]
-    },
-    "config": {
-        "preferred-install": "dist",
-        "sort-packages": true,
-        "optimize-autoloader": true
     }
 }
