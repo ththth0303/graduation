@@ -8,19 +8,21 @@
                 <thead>
                     <tr>
                         <th class="col-sm-4">Title</th>
-                        <th>Poster</th>
-                        <th>Attack</th>
-                        <th>Date</th>
+                        <th>Student</th>
+                        <th>Score</th>
+                        <th>Instructor</th>
+                        <th>Course</th>
                         <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td><a href="document/ư">Tài liệu</a></td>
+                        <td><a href="student/1">Tài liệu</a></td>
                         <td>
                             <a href="">Ngô Trung Thắng</a>
                         </td>
-                        <td><a href="">document.docx</a></td>
+                        <td>6.9</td>
+                        <td><a href="">Ts.Nguyễn Văn A, Ths.Nguyễn Văn B</a></td>
                         <td>May 15, 2015</td>
                         <td class="text-nowrap">
                             <a href="#" data-toggle="tooltip" data-original-title="Edit"> <i class="fa fa-pencil text-inverse m-r-10"></i> </a>
@@ -32,7 +34,8 @@
                         <td>
                             <a href="">Ngô Trung Thắng</a>
                         </td>
-                        <td><a href="">document.docx</a></td>
+                        <td>9</td>
+                        <td><a href="">Nguyễn Văn C</a></td>
                         <td>May 15, 2015</td>
                         <td class="text-nowrap">
                             <a href="#" data-toggle="tooltip" data-original-title="Edit"> <i class="fa fa-pencil text-inverse m-r-10"></i> </a>

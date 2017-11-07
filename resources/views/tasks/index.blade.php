@@ -22,7 +22,7 @@
                         <tr>
                             <td>1</td>
                             <td>Hight</td>
-                            <td data-target="#responsive-modal1" data-toggle="modal">Hoàn thành đề cương</td>
+                            <td><a href="/task/1">Hoàn thành đề cương</a></td>
                             <td>Ngô Trung Thắng<br>
                             Ngô Trung Thắng<br>
                             Ngô Trung Thắng<br></td>
@@ -35,7 +35,7 @@
                                     </div>
                                 </div>
                             </td>
-                            <td><img alt="default" class="model_img img-responsive" data-target="#responsive-modal" data-toggle="modal" src="../plugins/images/model.png"></td>
+                            <td><img alt="Update" class="model_img img-responsive" data-target="#responsive-modal" data-toggle="modal" src="../plugins/images/model.png"></td>
                         </tr>
                         <tr>
                             <td>1</td>
@@ -67,7 +67,7 @@
                                     </div>
                                 </div>
                             </td>
-                            <td><img alt="default" class="model_img img-responsive" data-target="#responsive-modal" data-toggle="modal" src="../plugins/images/model.png"></td>
+                            <td><img alt="Update" class="model_img img-responsive" data-target="#responsive-modal" data-toggle="modal" src="../plugins/images/model.png"></td>
                         </tr>
                         <tr>
                             <td>1</td>
@@ -83,45 +83,12 @@
                                     </div>
                                 </div>
                             </td>
-                            <td><img alt="default" class="model_img img-responsive" data-target="#responsive-modal" data-toggle="modal" src="../plugins/images/model.png"></td>
+                            <td><img alt="Update" class="model_img img-responsive" data-target="#responsive-modal" data-toggle="modal" src="../plugins/images/model.png"></td>
                         </tr>
                     </tbody>
                 </table>
             </div>
         </div>
-        <div aria-hidden="true" aria-labelledby="myModalLabel" class="modal fade" id="responsive-modal1" role="dialog" style="display: none;" tabindex="-1">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button aria-hidden="true" class="close" data-dismiss="modal" type="button">×</button>
-                        <h4 class="modal-title">Modal Content is Responsive</h4>
-                    </div>
-                    <div class="modal-body">
-                        <form>
-                            <div class="form-group">
-                                <label class="control-label" for="recipient-name">Description</label><br>
-                                <p>gfgjflgdl;gd;g</p>
-
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label" for="recipient-name">File</label><br>
-                                <a href="">doan.docx</a>
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label" for="recipient-name">Logs</label><br>
-                                <p>gfgfgfgfg
-                                gfgfgfgfgfg</p>
-                            </div>
-                        </form>
-                    </div>
-                    <div data-target="#responsive-modal" data-toggle="modal" class="btn btn-primary">
-                        update
-                    </div>
-                    <div class="modal-footer">
-                        <button class="btn btn-default waves-effect" data-dismiss="modal" type="button">Close</button> <button class="btn btn-danger waves-effect waves-light" type="button">Save changes</button>
-                    </div>
-                </div>
-            </div>
         </div>
         <div aria-hidden="true" aria-labelledby="myModalLabel" class="modal fade" id="responsive-modal" role="dialog" style="display: none;" tabindex="-1">
             <div class="modal-dialog">
@@ -152,12 +119,6 @@
 @endsection
 @section('script') 
     <script type="text/javascript">
-           var cart = new Vue({
-               el: '#th',
-
-               mounted: function () {
-                   $('#responsive-modal1').modal('show');
-               }
-           });
+           
     </script>
 @endsection

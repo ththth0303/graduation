@@ -4,18 +4,30 @@
         <h3 class="box-title m-b-0">Bordered Table</h3>
         <p class="text-muted m-b-20">Add<code>.table-bordered</code>for borders on all sides of the table and cells.</p>
         <div class="table-responsive">
-            <table class="table table-bordered">
+            <table class="table">
                 <thead>
                     <tr>
                         <th>Title</th>
-                        <th>Poster</th>
+                        <th class="col-sm-1">Poster</th>
                         <th class="col-sm-1">attach</th>
                         <th>Date</th>
                         <th class="text-nowrap">Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr data-target="#responsive-modal" data-toggle="modal">
+                    <tr>
+                        <td><a href="news/1">Thông  báo</a></td>
+                        <td>
+                            <a href="">Ngô Trung Thắng</a>
+                        </td>
+                        <td></td>
+                        <td>May 15, 2015</td>
+                        <td class="text-nowrap">
+                            <a href="#" data-toggle="tooltip" data-original-title="Edit"> <i class="fa fa-pencil text-inverse m-r-10"></i> </a>
+                            <a href="#" data-toggle="tooltip" data-original-title="Close"> <i class="fa fa-close text-danger"></i> </a>
+                        </td>
+                    </tr>
+                    <tr>
                         <td>Thông  báo</td>
                         <td>
                             <a href="">Ngô Trung Thắng</a>

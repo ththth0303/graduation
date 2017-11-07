@@ -11,15 +11,20 @@
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-});
-Route::get('/task', function () {
-    return view('tasks.index');
-});
-Route::get('/new', function () {
-    return view('news.index');
-});
-Route::get('/document', function () {
-    return view('documents.index');
-});
+// Route::get('/', function () {
+//     return view('index');
+// });
+// Route::get('/task', function () {
+//     return view('tasks.index');
+// });
+// Route::get('/new', function () {
+//     return view('news.index');
+// });
+// Route::get('/document', function () {
+//     return view('documents.index');
+// });
+
+Route::resource('task', 'TaskController');
+Route::resource('news', 'NewsController');
+Route::resource('document', 'DocumentController');
+Route::resource('student', 'StudentController');
