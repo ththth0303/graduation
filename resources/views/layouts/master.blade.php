@@ -11,9 +11,12 @@
     <title>Pixel Admin - Responsive Admin Dashboard Template build with Twitter Bootstrap</title><!-- Bootstrap Core CSS -->
     <link href="/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"><!-- Menu CSS -->
     <link href="/bower_components/sidebar-nav/dist/sidebar-nav.min.css" rel="stylesheet"><!-- animation CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link href="/bower_components/jquery-loading/dist/jquery.loading.min.css" rel="stylesheet">
     <link href="/css/animate.css" rel="stylesheet"><!-- Custom CSS -->
     <link href="/css/style.css" rel="stylesheet"><!-- color CSS you can use different color css from css/colors folder -->
     <link href="/css/colors/blue.css" rel="stylesheet">
+    @yield('style')
 </head>
 <body>
     <!-- Preloader -->
@@ -117,10 +120,13 @@
         </div><!-- /#page-wrapper -->
     </div><!-- /#wrapper -->
     <!-- jQuery -->
-    </script> 
+    </script>
     <script src="{{asset('bower_components/jquery/dist/jquery.min.js')}}">
     </script>
     <script src="{{asset('bower_components/bootstrap/dist/js/bootstrap.min.js')}}">
+    </script>
+    </script>
+    <script src="{{asset('bower_components/jquery-loading/dist/jquery.loading.min.js')}}">
     </script>
     <script src="{{asset('bower_components/sidebar-nav/dist/sidebar-nav.min.js')}}">
     </script>
