@@ -3,7 +3,7 @@
     <div class="col-sm-12" id="th">
         <div class="white-box">
             <div style="border: 1px solid #d7d7d7; padding: 10px">
-            <div class="btn btn-default" data-target="#responsive-modal" data-toggle="modal">Update</div>
+            <div class="btn btn-default" data-target="#responsive-modal" data-toggle="modal" id="modal">Update</div>
                 <h2>Hoàn thành đề cương</h2>
                 <div class=""><p><b>Priority: </b>Hight</p></div>
                 <div class="">
@@ -18,14 +18,14 @@
                 <div class=""><p><b>Due date: </b>30/11/2017</p></div>
                 <div class=""><p><b>Assignee: </b>Ngô Trung Thắng, Ngô Trung Thắng </p></div>
                 <hr>
-                <div class=""><p><b>Attack: </b><a href="">document.docx</a></p></div>
+                <div class=""><p><b>Attack: </b><a href="{{ asset('asset/test2.pdf')}}" target="blank">document.docx</a></p></div>
                 <hr>
                 <div class=""><p><b>Description: </b>696969</p></div>
                 <hr>
                 <div class=""><p><b>Messages: </b>696969</p></div>
             </div>
         </div>
-        <div aria-hidden="true" aria-labelledby="myModalLabel" class="modal fade" id="responsive-modal" role="dialog" style="display: none;" tabindex="-1">
+        <div aria-hidden="true" aria-labelledby="myModalLabel" class="modal fade" id="responsive-modal" role="dialog" style="display: none;">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -36,7 +36,7 @@
                         <form>
                             <div class="form-group">
                                 <label class="control-label" for="recipient-name">% Done</label>
-                                <input class="form-control" id="recipient-name" type="text">
+                                <input class="form-control" id="recipient-name" type="text" autofocus="true">
                             </div>
                             <div class="form-group">
                                 <label class="control-label" for="message-text">Message:</label> 
@@ -53,5 +53,11 @@
     </div>
 @endsection
 @section('script') 
-    
+    <script type="text/javascript">
+        $('#modal').click(function (argument) {
+            setTimeout(() => {
+            $('#recipient-name').focus();
+            }, 200)
+        })
+    </script>
 @endsection

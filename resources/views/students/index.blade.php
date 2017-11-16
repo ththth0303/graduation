@@ -1,4 +1,9 @@
 @extends('layouts.master') @section('content')
+<style type="text/css">
+    @media print {
+        /*.table {display:none}*/
+    }
+</style>
 <div class="col-sm-12">
     <div class="white-box">
         <h3 class="box-title m-b-0">Bordered Table</h3>

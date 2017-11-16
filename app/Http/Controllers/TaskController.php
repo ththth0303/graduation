@@ -45,6 +45,9 @@ class TaskController extends Controller
      */
     public function show($id)
     {
+        // $path = storage_path('test2.pdf');
+
+        // return response()->download($path);
         return view('tasks.detail');
     }
 

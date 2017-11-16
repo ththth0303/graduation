@@ -26,18 +26,10 @@
             <div class="navbar-header">
                 <a class="navbar-toggle hidden-sm hidden-md hidden-lg" data-target=".navbar-collapse" data-toggle="collapse" href="javascript:void(0)"><i class="ti-menu"></i></a>
                 <div class="top-left-part">
-                    <a class="logo" href="index.html"><b><img alt="home" src="../plugins/images/pixeladmin-logo.png"></b><span class="hidden-xs"><img alt="home" src="../plugins/images/pixeladmin-text.png"></span>Khoa An toàn thông tin</a>
+                    <a class="" href="index.html"><b>
+                        Khoa An toàn thông tin
+                    </b></a>
                 </div>
-                <ul class="nav navbar-top-links navbar-left hidden-xs">
-                    <li>
-                        <a class="open-close hidden-xs waves-effect waves-light" href="javascript:void(0)"><i class="icon-arrow-left-circle ti-menu"></i></a>
-                    </li>
-                    <li>
-                        <form class="app-search hidden-xs" role="search">
-                            <input class="form-control" placeholder="Search..." type="text"> <a href="#"><i class="fa fa-search"></i></a>
-                        </form>
-                    </li>
-                </ul>
                 <ul class="nav navbar-top-links navbar-right pull-right">
                     <!-- /.dropdown -->
                     <li class="dropdown">
