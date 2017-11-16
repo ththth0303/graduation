@@ -28,3 +28,4 @@ Route::resource('task', 'TaskController');
 Route::resource('news', 'NewsController');
 Route::resource('document', 'DocumentController');
 Route::resource('student', 'StudentController');
+Route::resource('user', 'UserController');

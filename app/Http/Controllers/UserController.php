@@ -3,9 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreUserRequest;
+use App\User;
 
-class TaskController extends Controller
+class UserController extends Controller
 {
+    public function __construct(User $user)
+    {
+        $this->user = $user;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -13,7 +19,8 @@ class TaskController extends Controller
      */
     public function index()
     {
-        return view('tasks.index');
+        $users = $this->user->paginate(10);
+        return view('users.index')->with('users', $users);
     }
 
     /**
@@ -23,7 +30,7 @@ class TaskController extends Controller
      */
     public function create()
     {
-        return view('task.create');
+        return view('users.create');
     }
 
     /**
@@ -32,9 +39,13 @@ class TaskController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreUserRequest $request)
     {
-        //
+
+        $data = $request->all();
+        // dd($data);
+        $data = User::create($data);
+        return $data;
     }
 
     /**
@@ -45,10 +56,7 @@ class TaskController extends Controller
      */
     public function show($id)
     {
-        // $path = storage_path('test2.pdf');
-
-        // return response()->download($path);
-        return view('tasks.detail');
+        return view('users.detail');
     }
 
     /**
