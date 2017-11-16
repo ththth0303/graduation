@@ -29,3 +29,7 @@ Route::resource('news', 'NewsController');
 Route::resource('document', 'DocumentController');
 Route::resource('student', 'StudentController');
 Route::resource('user', 'UserController');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
