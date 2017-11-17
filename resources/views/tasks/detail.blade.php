@@ -4,17 +4,18 @@
         <div class="white-box">
             <div class="clearfix" style="border: 1px solid #d7d7d7; padding: 10px">
                 <div class="col-md-12">
-                    <div class="title col-md-10 col-sm-12 col-xs-12"><h2>Hoàn thành đề cương</h2></div>
-                    <div class="btn btn-danger col-md-2 col-sm-12 col-xs-12 clearfix" data-target="#responsive-modal" data-toggle="modal">Update</div>
+                    <div class="title col-md-9 col-sm-12 col-xs-12"><h2>{{ $task->title }}</h2></div>
+                    <div class="btn btn-danger col-md-2 col-sm-12 col-xs-12 clearfix" data-target="#responsive-modal" data-toggle="modal">Cập nhật tiến độ</div>
+                    {{-- <div class="btn btn-danger col-md-1">Hoàn Thành</div> --}}
                 </div>
-                <div class="info"><p><b>Priority: </b>Hight</p></div>
-                <div class="info"><p><b>Start date: </b>11/11/2017</p></div>
-                <div class="info"><p><b>Due date: </b>30/11/2017</p></div>
+                <div class="info"><p><b>Priority: </b>{{ $task->priority }}</p></div>
+                <div class="info"><p><b>Start date: </b>{{ $task->start_date }}</p></div>
+                <div class="info"><p><b>Due date: </b>{{ $task->end_date }}</p></div>
                 <div class="col-sm-12">
                     <p class="col-md-2 status"><b>Status: </b></p>
                     <div class="progress progress-lg col-md-6">
-                        <div class="progress-bar progress-bar-success" role="progressbar" style="width: 20%;">
-                            20%
+                        <div class="progress-bar progress-bar-success" role="progressbar" style="width: {{ $task->status }}%;">
+                            {{ $task->status }}%
                         </div>
                     </div>
                 </div>
@@ -23,9 +24,9 @@
                 <hr class="col-md-12">
                 <div class="col-md-12"><p><b>Attack: </b><a href="">document.docx</a></p></div>
                 <hr class="col-md-12">
-                <div class="col-md-12"><p><b>Description: </b>696969</p></div>
+                <div class="col-md-12"><p><b>Description: </b>{{ $task->description }}</p></div>
                 <hr class="col-md-12">
-                <div class="col-md-12"><p><b>Messages: </b>696969</p></div>
+                <div class="col-md-12"><p><b>Messages: </b>{{ $task->messages }}</p></div>
             </div>
         </div>
         <div aria-hidden="true" aria-labelledby="myModalLabel" class="modal fade" id="responsive-modal" role="dialog" style="display: none;">
@@ -33,17 +34,28 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <button aria-hidden="true" class="close" data-dismiss="modal" type="button">×</button>
-                        <h4 class="modal-title">Modal Content is Responsive</h4>
+                        <h4 class="modal-title">Cập nhật tiến độ</h4>
                     </div>
                     <div class="modal-body">
                         <form>
                             <div class="form-group">
-                                <label class="control-label" for="recipient-name">% Done</label>
-                                <input class="form-control" id="recipient-name" type="text" autofocus>
+                                <label class="control-label" for="recipient-name">Tiến độ ({{ $task->status }}%)</label>
+                                <input class="form-control" id="recipient-name" type="number" autofocus min="0" max="100" required="true">
                             </div>
                             <div class="form-group">
-                                <label class="control-label" for="message-text">Message:</label>
+                                <label class="control-label" for="message-text">Ghi chú:</label>
                                 <textarea class="form-control" id="message-text"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label" for="message-text">Đính kèm:</label>
+                                <div class="">
+                                    <div class="fileinput fileinput-new input-group" data-provides="fileinput">
+                                        <div class="form-control" data-trigger="fileinput"> <i class="glyphicon glyphicon-file fileinput-exists"></i> <span class="fileinput-filename"></span></div>
+                                        <span class="input-group-addon btn btn-default btn-file"> <span class="fileinput-new">Select file</span> <span class="fileinput-exists">Change</span>
+                                        <input type="file" name="">
+                                        </span> <a href="#" class="input-group-addon btn btn-default fileinput-exists" data-dismiss="fileinput">Remove</a>
+                                    </div>
+                                </div>
                             </div>
                         </form>
                     </div>
@@ -56,8 +68,9 @@
     </div>
 @endsection
 @section('script')
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jasny-bootstrap/3.1.3/js/jasny-bootstrap.min.js"></script>
 @endsection
 @section('style')
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jasny-bootstrap/3.1.3/css/jasny-bootstrap.css" />
   <link rel="stylesheet" href="{{ asset('css/tasks/style.css') }}">
 @endsection

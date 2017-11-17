@@ -45,7 +45,7 @@
             <div class="form-group">
                 <label class="col-sm-12">Birthday</label>
                 <div class="col-sm-12">
-                    <input class="form-control" type="date"  name="birthday">
+                    <input class="form-control" type="text"  name="birthday" readonly="true">
                 </div>
             </div>
             <div class="form-group">
@@ -58,8 +58,8 @@
                 </div>
             </div>
             <div class="form-group">
-                <label class="control-label">Level</label>
-                <div class="radio-list">
+                <label class="col-md-12">Level</label>
+                <div class="radio-list col-md-12">
                     <label class="radio-inline p-0">
                         <div class="radio radio-info">
                             <input type="radio" name="level" id="radio1" value="1" checked="checked">
@@ -80,12 +80,14 @@
                     <div class="fileinput fileinput-new input-group" data-provides="fileinput">
                         <div class="form-control" data-trigger="fileinput"> <i class="glyphicon glyphicon-file fileinput-exists"></i> <span class="fileinput-filename"></span></div>
                         <span class="input-group-addon btn btn-default btn-file"> <span class="fileinput-new">Select file</span> <span class="fileinput-exists">Change</span>
-                        <input type="file" name="...">
+                        <input type="file" name="avatar">
                         </span> <a href="#" class="input-group-addon btn btn-default fileinput-exists" data-dismiss="fileinput">Remove</a> </div>
                 </div>
             </div>
-            <button type="submit" class="btn btn-success waves-effect waves-light m-r-10">Submit</button>
-            <button type="submit" class="btn btn-inverse waves-effect waves-light">Cancel</button>
+            <div class="form-group" style="text-align: center;">
+                <button type="submit" class="btn btn-success waves-effect waves-light m-r-10">Submit</button>
+                <button type="submit" class="btn btn-inverse waves-effect waves-light">Cancel</button>
+            </div>
         </form>
     </div>
 </div>
@@ -93,4 +95,13 @@
 @section('script')
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jasny-bootstrap/3.1.3/css/jasny-bootstrap.css" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jasny-bootstrap/3.1.3/js/jasny-bootstrap.min.js"></script>
+<script>
+    $('input[name="birthday"]').daterangepicker({
+        singleDatePicker: true,
+        showDropdowns: true,
+        locale: {
+            format: 'YYYY-MM-DD'
+        }
+    });
+</script>
 @endsection

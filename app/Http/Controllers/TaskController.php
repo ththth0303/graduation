@@ -3,9 +3,18 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use App\Task;
+use App\Attach;
+use DB;
 
 class TaskController extends Controller
 {
+    public function __construct(Task $task, Attach $attach)
+    {
+        $this->task = $task;
+        $this->attach = $attach;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -23,7 +32,7 @@ class TaskController extends Controller
      */
     public function create()
     {
-        return view('task.create');
+        return view('tasks.create');
     }
 
     /**
@@ -34,7 +43,23 @@ class TaskController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        DB::beginTransaction();
+        try {
+            $data = $request->all();
+            $data['user_id'] = 1;
+            $data = $this->task->create($data);
+            if ($request->hasFile('attach')) {
+                $name = $request->file('attach')->getClientOriginalName();
+                $hashName = $request->file('attach')->hashName();
+                if (Storage::put("attachs/" . $hashName, $request->attch)) {
+                    $this->attch->create(['name' => $name, $path]);
+                }
+            }
+            DB::commit();
+            return $data;
+        } catch (\Exception $e) {
+            DB::rollback();
+        }
     }
 
     /**
@@ -43,9 +68,9 @@ class TaskController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Task $task)
     {
-        return view('tasks.detail');
+        return view('tasks.detail')->with('task', $task);
     }
 
     /**

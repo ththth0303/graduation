@@ -16,6 +16,7 @@
     <link href="/css/animate.css" rel="stylesheet"><!-- Custom CSS -->
     <link href="/css/style.css" rel="stylesheet"><!-- color CSS you can use different color css from css/colors folder -->
     <link href="/css/colors/blue.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-daterangepicker/2.1.25/daterangepicker.css" />
     @yield('style')
 </head>
 <body>
@@ -29,18 +30,8 @@
             <div class="navbar-header">
                 <a class="navbar-toggle hidden-sm hidden-md hidden-lg" data-target=".navbar-collapse" data-toggle="collapse" href="javascript:void(0)"><i class="ti-menu"></i></a>
                 <div class="top-left-part">
-                    <a class="logo" href="index.html"><b><img alt="home" src="../plugins/images/pixeladmin-logo.png"></b><span class="hidden-xs"><img alt="home" src="../plugins/images/pixeladmin-text.png"></span>Khoa An toàn thông tin</a>
+                    <a class="" href="index.html"><b>Khoa An toàn thông tin</b></a>
                 </div>
-                <ul class="nav navbar-top-links navbar-left hidden-xs">
-                    <li>
-                        <a class="open-close hidden-xs waves-effect waves-light" href="javascript:void(0)"><i class="icon-arrow-left-circle ti-menu"></i></a>
-                    </li>
-                    <li>
-                        <form class="app-search hidden-xs" role="search">
-                            <input class="form-control" placeholder="Search..." type="text"> <a href="#"><i class="fa fa-search"></i></a>
-                        </form>
-                    </li>
-                </ul>
                 <ul class="nav navbar-top-links navbar-right pull-right">
                     <!-- /.dropdown -->
                     <li class="dropdown">
@@ -75,19 +66,15 @@
         <!-- Left navbar-header -->
         <div class="navbar-default sidebar" role="navigation">
             <div class="sidebar-nav navbar-collapse">
-                <ul class="nav" id="side-menu">
-                    <li class="sidebar-search hidden-sm hidden-md hidden-lg">
-                        <!-- input-group -->
-                        <div class="input-group custom-search-form">
-                            <input class="form-control" placeholder="Search..." type="text"> <span class="input-group-btn"><button class="btn btn-default" type="button"><span class="input-group-btn"><i class="fa fa-search"></i></span></button></span>
-                        </div><!-- /input-group -->
-                    </li>
-                    <li>
-                        <a class="waves-effect" href="index.html"><i class="linea-icon linea-basic fa-fw" data-icon="v"></i> <span class="hide-menu">Dashboard</span></a>
-                    <li>
-                        <a class="waves-effect" href="login.html"><i class="linea-icon linea-aerrow fa-fw" data-icon="&#xe045;"></i> <span class="hide-menu">Log out</span></a>
-                    </li>
-                </ul>
+                <div id="menu">
+                    <ul class="nav" id="side-menu">
+                        <li>
+                            <a class="waves-effect" href="index.html"><i class="linea-icon linea-basic fa-fw" data-icon="v"></i> <span class="hide-menu">Dashboard</span></a>
+                        <li>
+                            <a class="waves-effect" href="login.html"><i class="linea-icon linea-aerrow fa-fw" data-icon="&#xe045;"></i> <span class="hide-menu">Log out</span></a>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div><!-- Left navbar-header end -->
         <!-- Page Content -->
@@ -140,6 +127,8 @@
     </script>
     </script> <!-- Bootstrap Core JavaScript -->
     <script src="{{asset('https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.2/vue.js')}}"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.2/moment-with-locales.min.js"></script>
+    <script src="{{ asset('bower_components/bootstrap-daterangepicker/daterangepicker.js') }}"></script>
     @yield('script')
 </body>
 </html>

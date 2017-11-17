@@ -1,5 +1,10 @@
 @extends('layouts.master')
 @section('content')
+<style>
+    .daterangepicker {
+      z-index: 1600 !important; /* has to be larger than 1050 */
+    }
+</style>
     <div class="col-sm-12" id="th">
         <div class="white-box">
             <div class="btn btn-danger" data-target="#create-task" data-toggle="modal">New</div>
@@ -133,35 +138,10 @@
                             </div>
                             <div class="form-group">
                                 <div class="input-daterange input-group" id="date-range">
-                                    <input type="text" class="form-control" name="start" />
+                                    <input type="text" class="form-control" name="start" id="date" />
                                     <span class="input-group-addon bg-info b-0 text-white">to</span>
                                     <input type="text" class="form-control" name="end" />
                                 </div>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button class="btn btn-default waves-effect" data-dismiss="modal" type="button">Close</button> <button class="btn btn-danger waves-effect waves-light" type="button">Save changes</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div aria-hidden="true" aria-labelledby="myModalLabel" class="modal fade" id="responsive-modal" role="dialog" style="display: none;">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button aria-hidden="true" class="close" data-dismiss="modal" type="button">×</button>
-                        <h4 class="modal-title">Modal Content is Responsive</h4>
-                    </div>
-                    <div class="modal-body">
-                        <form>
-                            <div class="form-group">
-                                <label class="control-label" for="recipient-name">% Done</label>
-                                <input class="form-control" id="recipient-name" type="text">
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label" for="message-text">Message:</label>
-                                <textarea class="form-control" id="message-text"></textarea>
                             </div>
                         </form>
                     </div>
@@ -176,7 +156,18 @@
 @section('script')
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jasny-bootstrap/3.1.3/css/jasny-bootstrap.css" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jasny-bootstrap/3.1.3/js/jasny-bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.2/moment-with-locales.min.js"></script>
     <script src="{{ asset('bower_components/bootstrap-daterangepicker/daterangepicker.js') }}"></script>
-    <script src="{{ asset('js/tasks/task.js') }}"></script>
+    {{-- <script src="{{ asset('js/tasks/task.js') }}"></script> --}}
+    <script>
+
     $('#date-range').daterangepicker();
+    </script>
+@endsection
+@section('style')
+<style>
+    .datepicker {
+      z-index: 1600 !important; /* has to be larger than 1050 */
+    }
+</style>
 @endsection

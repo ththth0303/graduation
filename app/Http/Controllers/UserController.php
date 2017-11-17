@@ -43,7 +43,13 @@ class UserController extends Controller
     {
 
         $data = $request->all();
+
         // dd($data);
+        $data['password'] = bcrypt($data['password']);
+        if ($request->hasFile('avatar')) {
+            $path = $request->avatar->store('avatars');
+            $data['avatar'] = $path;
+        }
         $data = User::create($data);
         return $data;
     }

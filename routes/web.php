@@ -23,9 +23,19 @@
 // Route::get('/document', function () {
 //     return view('documents.index');
 // });
-
-Route::resource('task', 'TaskController');
-Route::resource('news', 'NewsController');
-Route::resource('document', 'DocumentController');
-Route::resource('student', 'StudentController');
+Route::group(['prefix' => ''], function () {
+});
 Route::resource('user', 'UserController');
+
+Route::get('login', 'Auth\LoginController@login');
+Route::get('logout', 'Auth\LoginController@logout');
+Route::post('login', 'Auth\LoginController@authenticate')->name('login');
+
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/', 'HomeController@index');
+    Route::resource('task', 'TaskController');
+    Route::resource('news', 'NewsController');
+    Route::resource('document', 'DocumentController');
+    Route::resource('student', 'StudentController');
+});

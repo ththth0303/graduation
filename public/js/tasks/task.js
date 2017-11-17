@@ -12,6 +12,8 @@ var  = new Vue({
     },
 
     methods: {
-        //
+        loadData: function () {
+
+        }
     }
 });

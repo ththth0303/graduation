@@ -23,6 +23,7 @@ class User extends Authenticatable
         'gender',
         'level',
         'password',
+        'avatar',
     ];
 
     /**
@@ -33,4 +34,29 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function tasks()
+    {
+        return $this->hasMany(Task::class, 'user_id');
+    }
+    public function attachs()
+    {
+        return $this->hasMany(Attach::class, 'user_id');
+    }
+    public function documents()
+    {
+        return $this->hasMany(Document::class, 'user_id');
+    }
+    public function assignees()
+    {
+        return $this->hasMany(UserTask::class, 'user_id');
+    }
+    public function finalProjects()
+    {
+        return $this->hasMany(FinalYearProject::class, 'user_id');
+    }
+    public function activities()
+    {
+        return $this->hasMany(Activities::class, 'user_id');
+    }
 }
