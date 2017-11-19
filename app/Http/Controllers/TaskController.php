@@ -6,14 +6,17 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Task;
 use App\Attach;
+use App\UserTask;
 use DB;
+use Auth;
 
 class TaskController extends Controller
 {
-    public function __construct(Task $task, Attach $attach)
+    public function __construct(Task $task, Attach $attach, UserTask $userTask)
     {
         $this->task = $task;
         $this->attach = $attach;
+        $this->userTask = $userTask;
     }
     /**
      * Display a listing of the resource.
@@ -22,7 +25,8 @@ class TaskController extends Controller
      */
     public function index()
     {
-        return view('tasks.index');
+        $tasks = $this->task->with(['assignee', 'user', 'attachs'])->paginate(10);
+        return view('tasks.index')->with('tasks', $tasks);
     }
 
     /**
@@ -43,23 +47,30 @@ class TaskController extends Controller
      */
     public function store(Request $request)
     {
+        $attach = [];
         DB::beginTransaction();
-        try {
+        // try {
             $data = $request->all();
             $data['user_id'] = 1;
-            $data = $this->task->create($data);
+            $task = $this->task->create($data);
+            foreach ($request->user as $key => $value) {
+                $this->userTask->create(['user_id' => $value, 'task_id' => $task->id]);
+            }
             if ($request->hasFile('attach')) {
-                $name = $request->file('attach')->getClientOriginalName();
-                $hashName = $request->file('attach')->hashName();
-                if (Storage::put("attachs/" . $hashName, $request->attch)) {
-                    $this->attch->create(['name' => $name, $path]);
+                $attach['name'] = $request->file('attach')->getClientOriginalName();
+                $attach['path'] = $request->file('attach')->hashName();
+                $attach['user_id'] = Auth::user()->id;
+                $attach['attachtable_id'] = Auth::user()->id;
+                $attach['attachtable_type'] = 'tasks';
+                if (Storage::disk('local')->put('attachs', $request->attach)) {
+                    $this->attach->create($attach);
                 }
             }
             DB::commit();
             return $data;
-        } catch (\Exception $e) {
+        // } catch (\Exception $e) {
             DB::rollback();
-        }
+        // }
     }
 
     /**

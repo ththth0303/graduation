@@ -1,28 +1,41 @@
 @extends('layouts.master') @section('content')
 <div class="col-sm-12">
+    @if(session('message'))
+        <p class="btn-info text-center">{{ session('message') }}</p>
+    @endif
     <div class="white-box">
-        <div class="btn btn-danger"><a class="text-white" href="user/create">New</a></div>
+        <a class="text-white" href="user/create">
+            <div class="btn btn-danger">New</div>
+        </a>
         <div class="table-responsive">
-            <table class="table">
+            <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th class="col-sm-4">Name</th>
+                        <th></th>
+                        <th class="col-sm-4">Tên</th>
                         <th>Email</th>
-                        <th>Department</th>
-                        <th>Date</th>
-                        <th>Action</th>
+                        <th>Quyền hạn</th>
+                        <th>Hành động</th>
                     </tr>
                 </thead>
                 <tbody>
                     @if(count($users))
                         @foreach($users as $user)
                         <tr>
-                            <td><a href="document/ư">{{ $user->name }}</a></td>
+                            <td><img src="{{ asset(config('path.avatar') . $user->avatar) }}" alt="" width="45px" height="45" style="margin: -15px 0px"></td>
+                            <td><a href="{{ route('user.show', $user->id) }}">{{ $user->name }}</a></td>
                             <td>{{ $user->email }}</td>
-                            <td>{{ $user->department }}</td>
-                            <td>May 15, 2015</td>
+                            <td>
+                                @if($user->level == config('permission.admin'))
+                                    <div class="label label-success">Admin</div>
+                                @elseif($user->level == config('permission.normal'))
+                                    <div class="label label-info">Giảng viên</div>
+                                @else
+                                    <div class="label label-danger">Chưa kích hoạt</div>
+                                @endif
+                            </td>
                             <td class="text-nowrap">
-                                <a href="#" data-toggle="tooltip" data-original-title="Edit"> <i class="fa fa-pencil text-inverse m-r-10"></i> </a>
+                                <a href="{{ route('user.edit', $user->id) }}" data-toggle="tooltip" data-original-title="Edit"> <i class="fa fa-pencil text-inverse m-r-10"></i> </a>
                                 <a href="#" data-toggle="tooltip" data-original-title="Close"> <i class="fa fa-close text-danger"></i> </a>
                             </td>
                         </tr>

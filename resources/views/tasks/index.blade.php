@@ -1,10 +1,5 @@
 @extends('layouts.master')
 @section('content')
-<style>
-    .daterangepicker {
-      z-index: 1600 !important; /* has to be larger than 1050 */
-    }
-</style>
     <div class="col-sm-12" id="th">
         <div class="white-box">
             <div class="btn btn-danger" data-target="#create-task" data-toggle="modal">New</div>
@@ -13,23 +8,35 @@
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th>Priority</th>
-                            <th>Title</th>
-                            <th>Assignee</th>
-                            <th>Start date</th>
-                            <th>Due date</th>
-                            <th class="col-sm-4">% Done</th>
-                            <th>Action</th>
+                            <th>Uu tien</th>
+                            <th>Tieu de</th>
+                            <th>Giao vien</th>
+                            <th>Ngay bat dau</th>
+                            <th>ngay ket thuc</th>
+                            <th class="col-sm-4">Tien trinh</th>
+                            <th>Hanh dong</th>
                         </tr>
                     </thead>
                     <tbody>
+                    @foreach($tasks as $task)
                         <tr>
-                            <td>1</td>
-                            <td>Hight</td>
-                            <td><a href="/task/1">Hoàn thành đề cương</a></td>
-                            <td>Ngô Trung Thắng<br>
-                            Ngô Trung Thắng<br>
-                            Ngô Trung Thắng<br></td>
+                            <td>{{ $task->id }}</td>
+                            <td>
+                                @if($task->priority == 'nomal')
+                                De
+                                @elseif($task->priority == 'low')
+                                Trung binh
+                                @elseif($task->priority == 'hight')
+                                Cao
+                                @endif
+                            </td>
+                            <td><a href="{{ route('task.show', $task->id) }}">{{ $task->title }}</a></td>
+                            <td>
+                                @foreach($task->assignee as $assignee)
+                                <img src="{{ asset(config('path.avatar') . $assignee->avatar) }}" alt="">
+                                {{ $assignee->name }}
+                                @endforeach
+                            </td>
                             <td>2/11/2017</td>
                             <td>3/11/2017</td>
                             <td>
@@ -41,54 +48,7 @@
                             </td>
                             <td><img alt="Update" class="model_img img-responsive" data-target="#responsive-modal" data-toggle="modal" src="../plugins/images/model.png"></td>
                         </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>Deshmukh</td>
-                            <td>Prohaska</td>
-                            <td>@Genelia</td>
-                            <td>@Genelia</td>
-                            <td>@Genelia</td>
-                            <td>
-                                <div class="progress progress-lg">
-                                    <div class="progress-bar progress-bar-success" role="progressbar" style="width: 20%;">
-                                        20%
-                                    </div>
-                                </div>
-                            </td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>Deshmukh</td>
-                            <td>Prohaska</td>
-                            <td>@Genelia</td>
-                            <td>@Genelia</td>
-                            <td>@Genelia</td>
-                            <td>
-                                <div class="progress progress-lg">
-                                    <div class="progress-bar progress-bar-success" role="progressbar" style="width: 20%;">
-                                        20%
-                                    </div>
-                                </div>
-                            </td>
-                            <td><img alt="Update" class="model_img img-responsive" data-target="#responsive-modal" data-toggle="modal" src="../plugins/images/model.png"></td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>Deshmukh</td>
-                            <td>Prohaska</td>
-                            <td>@Genelia</td>
-                            <td>@Genelia</td>
-                            <td>@Genelia</td>
-                            <td>
-                                <div class="progress progress-lg">
-                                    <div class="progress-bar progress-bar-success" role="progressbar" style="width: 20%;">
-                                        20%
-                                    </div>
-                                </div>
-                            </td>
-                            <td><img alt="Update" class="model_img img-responsive" data-target="#responsive-modal" data-toggle="modal" src="../plugins/images/model.png"></td>
-                        </tr>
+                    @endforeach
                     </tbody>
                 </table>
             </div>
@@ -159,15 +119,4 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.2/moment-with-locales.min.js"></script>
     <script src="{{ asset('bower_components/bootstrap-daterangepicker/daterangepicker.js') }}"></script>
     {{-- <script src="{{ asset('js/tasks/task.js') }}"></script> --}}
-    <script>
-
-    $('#date-range').daterangepicker();
-    </script>
-@endsection
-@section('style')
-<style>
-    .datepicker {
-      z-index: 1600 !important; /* has to be larger than 1050 */
-    }
-</style>
 @endsection

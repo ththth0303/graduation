@@ -10,50 +10,39 @@
 @endif
 <div class="col-sm-12">
     <div class="white-box col-md-6 col-md-offset-3">
-        <form class="form-horizontal" method="post" enctype="multipart/form-data" action="/user">
+        <form class="form-horizontal" method="post" enctype="multipart/form-data" action="{{ route('user.update', $user->id) }}">
             {{ csrf_field() }}
+            {{ method_field('PUT') }}
             <div class="form-group">
                 <label class="col-md-12">Name</label>
                 <div class="col-md-12">
-                    <input type="text" class="form-control" value="" name="name">
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-md-12" for="example-email">Email</label>
-                <div class="col-md-12">
-                    <input type="email" id="email" name="email" class="form-control">
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-md-12">Password</label>
-                <div class="col-md-12">
-                    <input type="password" class="form-control" name="password">
+                    <input type="text" class="form-control" value="{{ $user->name }}" name="name" {{ $edit }}>
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-md-12">Degree</label>
                 <div class="col-md-12">
-                    <input type="text" class="form-control" name="degree">
+                    <input type="text" class="form-control" name="degree" value="{{ $user->degree }}" {{ $edit }} >
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-md-12">Department</label>
                 <div class="col-md-12">
-                    <input class="form-control" name="department"></input>
+                    <input class="form-control" name="department" value="{{ $user->department }}" {{ $edit }}></input>
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-sm-12">Birthday</label>
                 <div class="col-sm-12">
-                    <input class="form-control" type="text"  name="birthday">
+                    <input class="form-control" type="text"  name="birthday" value="{{ $user->birthday }}">
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-sm-12">Gender</label>
                 <div class="col-sm-12">
-                    <select class="form-control" name="gender">
-                        <option value="1">Nam</option>
-                        <option value="2">Nữ</option>
+                    <select class="form-control" name="gender" {{ $edit }} >
+                        <option value="1" {{ $user->gender == 1? 'selected': '' }} >Nam</option>
+                        <option value="2" {{ $user->gender == 2? 'selected': '' }}>Nữ</option>
                     </select>
                 </div>
             </div>
@@ -62,13 +51,13 @@
                 <div class="radio-list col-md-12">
                     <label class="radio-inline p-0">
                         <div class="radio radio-info">
-                            <input type="radio" name="level" id="radio1" value="1" checked="checked">
+                            <input type="radio" name="level" id="radio1" value="1" {{ $user->level == 1? 'checked': '' }} {{ $edit }}>
                             <label for="radio1">Admin</label>
                         </div>
                     </label>
                     <label class="radio-inline">
                         <div class="radio radio-info">
-                            <input type="radio" name="level" id="radio2" value="2">
+                            <input type="radio" name="level" id="radio2" value="2" {{ $user->level == 2? 'checked': '' }} {{ $edit }}>
                             <label for="radio2">Normail</label>
                         </div>
                     </label>
@@ -83,17 +72,19 @@
                         <input type="file" name="avatar" accept="image/*" onchange="loadFile(event)">
                         </span> <a href="#" class="input-group-addon btn btn-default fileinput-exists" data-dismiss="fileinput">Remove</a> </div>
                 </div>
-                <img id="output" width="100px" />
+                <img id="output" width="100px" src="{{ asset(config('path.avatar') . $user->avatar ) }}" />
             </div>
             <div class="form-group" style="text-align: center;">
                 <button type="submit" class="btn btn-success waves-effect waves-light m-r-10">Submit</button>
-                <button type="reset" class="btn btn-inverse waves-effect waves-light" onclick="hideImage()">Cancel</button>
+                <button type="reset" class="btn btn-inverse waves-effect waves-light">Cancel</button>
             </div>
         </form>
     </div>
 </div>
 @endsection
 @section('script')
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jasny-bootstrap/3.1.3/css/jasny-bootstrap.css" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jasny-bootstrap/3.1.3/js/jasny-bootstrap.min.js"></script>
 <script src="{{ asset('js/users/user.js') }}"></script>

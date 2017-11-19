@@ -30,29 +30,23 @@
             <div class="navbar-header">
                 <a class="navbar-toggle hidden-sm hidden-md hidden-lg" data-target=".navbar-collapse" data-toggle="collapse" href="javascript:void(0)"><i class="ti-menu"></i></a>
                 <div class="top-left-part">
-                    <a class="" href="index.html"><b>Khoa An toàn thông tin</b></a>
+                    <a class="" href="/"><b>Khoa An toàn thông tin</b></a>
                 </div>
                 <ul class="nav navbar-top-links navbar-right pull-right">
                     <!-- /.dropdown -->
                     <li class="dropdown">
-                        <a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#"><img alt="user-img" class="img-circle" src="../plugins/images/users/varun.jpg" width="36"><b class="hidden-xs">Steave</b></a>
+                        <a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#"><img alt="user-img" class="img-circle" src="{{ asset(config('path.avatar').Auth::user()->avatar) }}" width="30px" height="30px"><b class="hidden-xs">{{ Auth::user()->name }}</b></a>
                         <ul class="dropdown-menu dropdown-user animated flipInY">
                             <li>
-                                <a href="#"><i class="ti-user"></i> My Profile</a>
-                            </li>
-                            <li>
-                                <a href="#"><i class="ti-wallet"></i> My Balance</a>
-                            </li>
-                            <li>
-                                <a href="#"><i class="ti-email"></i> Inbox</a>
+                                <a href="{{ route('user.show', Auth::user()->id) }}"><i class="ti-user"></i> Hồ sơ</a>
                             </li>
                             <li class="divider" role="separator"></li>
                             <li>
-                                <a href="#"><i class="ti-settings"></i> Account Setting</a>
+                                <a href="#"><i class="ti-settings"></i> Account Đổi mật khẩu</a>
                             </li>
                             <li class="divider" role="separator"></li>
                             <li>
-                                <a href="#"><i class="fa fa-power-off"></i> Logout</a>
+                                <a href="{{ asset('logout') }}"><i class="fa fa-power-off"></i> Đăng xuất</a>
                             </li>
                         </ul><!-- /.dropdown-user -->
                     </li><!-- .Megamenu -->
@@ -69,10 +63,24 @@
                 <div id="menu">
                     <ul class="nav" id="side-menu">
                         <li>
-                            <a class="waves-effect" href="index.html"><i class="linea-icon linea-basic fa-fw" data-icon="v"></i> <span class="hide-menu">Dashboard</span></a>
+                            <a class="waves-effect" href="{{ route('home') }}"><i class="linea-icon linea-basic fa-fw" data-icon="v"></i> <span class="hide-menu">Trang chu</span></a>
                         <li>
-                            <a class="waves-effect" href="login.html"><i class="linea-icon linea-aerrow fa-fw" data-icon="&#xe045;"></i> <span class="hide-menu">Log out</span></a>
+                        <li>
+                            <a class="waves-effect" href="{{ route('task.index') }}"><i class="linea-icon linea-basic fa-fw" data-icon="v"></i> <span class="hide-menu">Công việc</span></a>
+                        <li>
+                            <a class="waves-effect" href="{{ route('news.index') }}"><i class="linea-icon linea-aerrow fa-fw" data-icon="&#xe045;"></i> <span class="hide-menu">Thông báo</span></a>
                         </li>
+                        <li>
+                            <a class="waves-effect" href="{{ route('document.index') }}"><i class="linea-icon linea-aerrow fa-fw" data-icon="&#xe045;"></i> <span class="hide-menu">Mau van ban</span></a>
+                        </li>
+                        <li>
+                            <a class="waves-effect" href="{{ route('student.index') }}"><i class="linea-icon linea-aerrow fa-fw" data-icon="&#xe045;"></i> <span class="hide-menu">Do an tot nghiep</span></a>
+                        </li>
+                        @if(Auth::user()->level == config('permission.admin'))
+                            <li>
+                                <a class="waves-effect" href="{{ route('user.index') }}"><i class="linea-icon linea-aerrow fa-fw" data-icon="&#xe045;"></i> <span class="hide-menu">Giang vien</span></a>
+                            </li>
+                        @endif
                     </ul>
                 </div>
             </div>
@@ -127,6 +135,7 @@
     </script>
     </script> <!-- Bootstrap Core JavaScript -->
     <script src="{{asset('https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.2/vue.js')}}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.17.1/axios.min.js"></script>
      <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.2/moment-with-locales.min.js"></script>
     <script src="{{ asset('bower_components/bootstrap-daterangepicker/daterangepicker.js') }}"></script>
     @yield('script')

@@ -10,32 +10,21 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-// Route::get('/', function () {
-//     return view('index');
-// });
-// Route::get('/task', function () {
-//     return view('tasks.index');
-// });
-// Route::get('/new', function () {
-//     return view('news.index');
-// });
-// Route::get('/document', function () {
-//     return view('documents.index');
-// });
-Route::group(['prefix' => ''], function () {
+Route::get('/', function () {
+	return redirect(route('home'));
 });
-Route::resource('user', 'UserController');
 
 Route::get('login', 'Auth\LoginController@login');
 Route::get('logout', 'Auth\LoginController@logout');
 Route::post('login', 'Auth\LoginController@authenticate')->name('login');
 
-
 Route::middleware(['auth'])->group(function () {
-    Route::get('/', 'HomeController@index');
+    Route::get('home', 'HomeController@index')->name('home');
     Route::resource('task', 'TaskController');
     Route::resource('news', 'NewsController');
     Route::resource('document', 'DocumentController');
     Route::resource('student', 'StudentController');
+
+    Route::get('user/search/{name?}', 'UserController@search');
+    Route::resource('user', 'UserController');
 });

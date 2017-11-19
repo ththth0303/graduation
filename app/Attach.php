@@ -6,15 +6,26 @@ use Illuminate\Database\Eloquent\Model;
 
 class Attach extends Model
 {
+    protected $table = 'attachs';
+
     protected $fillable = [
-        'title',
-        'content',
-        'messages',
-        'priority',
-        'start_date',
-        'end_date',
+        'attachtable_id',
+        'attachtable_type',
+        'name',
+        'path',
         'user_id',
-        'process',
-        'status',
     ];
+
+    public function attachable()
+    {
+        return $this->morphTo();
+    }
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+    public function task()
+    {
+        return $this->belongsTo(Task::class, 'task_id');
+    }
 }

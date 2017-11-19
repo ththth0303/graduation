@@ -19,9 +19,10 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password');
-            $table->string('degree');
-            $table->string('department');
-            $table->date('birthday');
+            $table->string('degree')->nullable();
+            $table->string('avatar', 255)->nullable();
+            $table->string('department')->nullable();
+            $table->date('birthday')->nullable();
             $table->integer('gender');
             $table->integer('level');
             $table->rememberToken();

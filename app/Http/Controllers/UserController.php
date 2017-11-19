@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreUserRequest;
+use Illuminate\Support\Facades\Storage;
 use App\User;
+use Auth;
 
 class UserController extends Controller
 {
@@ -41,17 +43,18 @@ class UserController extends Controller
      */
     public function store(StoreUserRequest $request)
     {
-
         $data = $request->all();
-
-        // dd($data);
         $data['password'] = bcrypt($data['password']);
         if ($request->hasFile('avatar')) {
-            $path = $request->avatar->store('avatars');
-            $data['avatar'] = $path;
+            $request->avatar->store(config('path.avatar'));
+            $data['avatar'] = $request->avatar->hashName();
         }
-        $data = User::create($data);
-        return $data;
+        if (User::create($data)) {
+            $message = 'Tọa mới thành công';
+        } else {
+            $message = 'Có lỗi xảy ra';
+        }
+        return redirect(route('user.index'))->with('message', $message);
     }
 
     /**
@@ -60,9 +63,9 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(User $user)
     {
-        return view('users.detail');
+        return view('users.profile')->with('user', $user);
     }
 
     /**
@@ -71,9 +74,13 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(User $user)
     {
-        //
+        $edit = '';
+        // if (Auth::user()->level == config('permission.admin')) {
+        //     $edit = 'disabled';
+        // }
+        return view('users.edit')->with(['user'=> $user, 'edit' => $edit]);
     }
 
     /**
@@ -83,9 +90,22 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, User $user)
     {
-        //
+        $data = $request->all();
+        if ($request->hasFile('avatar')) {
+            $request->avatar->store(config('path.avatar'));
+            $data['avatar'] = $request->avatar->hashName();
+            if ($user->avatar && file_exists(config('path.avatar').$user->avatar)) {
+                unlink(config('path.avatar').$user->avatar);
+            }
+        }
+        if ($user->update($data)) {
+            $message = 'Chỉnh sửa thành công';
+        } else {
+            $message = 'Có lỗi xảy ra';
+        }
+        return redirect(route('user.index'))->with('message', $message);
     }
 
     /**
@@ -97,5 +117,12 @@ class UserController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function search($name)
+    {
+        // return 'dfdf';
+        // return $name;
+        return $this->user->select('name','id')->where('name', 'like', '%' . $name . '%' )->get();
     }
 }
