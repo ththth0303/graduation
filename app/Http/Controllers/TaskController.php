@@ -81,6 +81,8 @@ class TaskController extends Controller
      */
     public function show(Task $task)
     {
+        $task->load(['assignee.user', 'user', 'attachs']);
+        // dd($task);
         return view('tasks.detail')->with('task', $task);
     }
 

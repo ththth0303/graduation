@@ -27,4 +27,6 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('user/search/{name?}', 'UserController@search');
     Route::resource('user', 'UserController');
+
+    Route::get('download/{name}/{path}', 'AttachController@download')->name('download_attach');
 });

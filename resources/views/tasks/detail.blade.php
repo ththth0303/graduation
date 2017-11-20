@@ -8,7 +8,16 @@
                     <div class="btn btn-danger col-md-2 col-sm-12 col-xs-12 clearfix" data-target="#responsive-modal" data-toggle="modal">Cập nhật tiến độ</div>
                     {{-- <div class="btn btn-danger col-md-1">Hoàn Thành</div> --}}
                 </div>
-                <div class="info"><p><b>Priority: </b>{{ $task->priority }}</p></div>
+                <div class="info">
+                    <p><b>Priority: </b>
+                        @if($task->priority == 'nomal')
+                            De
+                        @elseif($task->priority == 'low')
+                            Trung binh
+                        @elseif($task->priority == 'hight')
+                            Cao
+                        @endif
+                    </p></div>
                 <div class="info"><p><b>Start date: </b>{{ $task->start_date }}</p></div>
                 <div class="info"><p><b>Due date: </b>{{ $task->end_date }}</p></div>
                 <div class="col-sm-12">
@@ -20,9 +29,18 @@
                     </div>
                 </div>
                 <hr>
-                <div class="col-md-12"><p><b>Assignee: </b>Ngô Trung Thắng, Ngô Trung Thắng </p></div>
+                <div class="col-md-12">
+                    <p><b>Assignee: </b>
+                        @foreach($task->assignee as $assignee)
+                            <a href="">{{ $assignee->user->name }}</a>
+                        @endforeach
+                    </p></div>
                 <hr class="col-md-12">
-                <div class="col-md-12"><p><b>Attack: </b><a href="">document.docx</a></p></div>
+                <div class="col-md-12"><p><b>Attack: </b>
+                    @foreach( $task->attachs as $attach)
+                    <a href="{{ route('download_attach', [$attach->name, $attach->path]) }}">{{ $attach->name }}</a>
+                    @endforeach
+                </p></div>
                 <hr class="col-md-12">
                 <div class="col-md-12"><p><b>Description: </b>{{ $task->description }}</p></div>
                 <hr class="col-md-12">

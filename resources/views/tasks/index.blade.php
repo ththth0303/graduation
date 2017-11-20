@@ -2,7 +2,8 @@
 @section('content')
     <div class="col-sm-12" id="th">
         <div class="white-box">
-            <div class="btn btn-danger" data-target="#create-task" data-toggle="modal">New</div>
+            <a href="{{ route('task.create') }}"><div class="btn btn-danger">New</div></a>
+            
             <div class="table-responsive">
                 <table class="table">
                     <thead>

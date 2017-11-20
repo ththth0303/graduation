@@ -16,7 +16,7 @@ class Task extends Migration
         Schema::create('tasks', function (Blueprint $table) {
             $table->increments('id');
             $table->string('title');
-            $table->string('content');
+            $table->text('content');
             $table->string('priority')->nullable();
             $table->date('start_date')->nullable();
             $table->date('end_date')->nullable();

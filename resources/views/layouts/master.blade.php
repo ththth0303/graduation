@@ -63,7 +63,7 @@
                 <div id="menu">
                     <ul class="nav" id="side-menu">
                         <li>
-                            <a class="waves-effect" href="{{ route('home') }}"><i class="linea-icon linea-basic fa-fw" data-icon="v"></i> <span class="hide-menu">Trang chu</span></a>
+                            <a class="waves-effect" href="{{ route('home') }}"><i class="linea-icon linea-basic fa-fw" data-icon="v"></i> <span class="hide-menu">Trang chủ</span></a>
                         <li>
                         <li>
                             <a class="waves-effect" href="{{ route('task.index') }}"><i class="linea-icon linea-basic fa-fw" data-icon="v"></i> <span class="hide-menu">Công việc</span></a>
@@ -71,14 +71,14 @@
                             <a class="waves-effect" href="{{ route('news.index') }}"><i class="linea-icon linea-aerrow fa-fw" data-icon="&#xe045;"></i> <span class="hide-menu">Thông báo</span></a>
                         </li>
                         <li>
-                            <a class="waves-effect" href="{{ route('document.index') }}"><i class="linea-icon linea-aerrow fa-fw" data-icon="&#xe045;"></i> <span class="hide-menu">Mau van ban</span></a>
+                            <a class="waves-effect" href="{{ route('document.index') }}"><i class="linea-icon linea-aerrow fa-fw" data-icon="&#xe045;"></i> <span class="hide-menu">Mẫu văn bản</span></a>
                         </li>
                         <li>
-                            <a class="waves-effect" href="{{ route('student.index') }}"><i class="linea-icon linea-aerrow fa-fw" data-icon="&#xe045;"></i> <span class="hide-menu">Do an tot nghiep</span></a>
+                            <a class="waves-effect" href="{{ route('student.index') }}"><i class="linea-icon linea-aerrow fa-fw" data-icon="&#xe045;"></i> <span class="hide-menu">Đồ án tốt nghiệp</span></a>
                         </li>
                         @if(Auth::user()->level == config('permission.admin'))
                             <li>
-                                <a class="waves-effect" href="{{ route('user.index') }}"><i class="linea-icon linea-aerrow fa-fw" data-icon="&#xe045;"></i> <span class="hide-menu">Giang vien</span></a>
+                                <a class="waves-effect" href="{{ route('user.index') }}"><i class="linea-icon linea-aerrow fa-fw" data-icon="&#xe045;"></i> <span class="hide-menu">Giảng viên</span></a>
                             </li>
                         @endif
                     </ul>

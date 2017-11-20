@@ -851,10 +851,7 @@ pre {
 .bg-title {
     border-bottom: 1px solid #e4e7ea;
     overflow: hidden;
-    padding: 15px 15px 10px;
-    margin-bottom: 25px;
-    margin-left: -25.5px;
-    margin-right: -25.5px
+    padding: 10px 10px;
 }
 .bg-title h4 {
     color: rgba(0, 0, 0, .5);
