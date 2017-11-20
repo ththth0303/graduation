@@ -9,14 +9,16 @@ use App\Attach;
 use App\UserTask;
 use DB;
 use Auth;
+use App\TaskUpdate;
 
 class TaskController extends Controller
 {
-    public function __construct(Task $task, Attach $attach, UserTask $userTask)
+    public function __construct(Task $task, Attach $attach, UserTask $userTask, TaskUpdate $taskUpdate)
     {
         $this->task = $task;
         $this->attach = $attach;
         $this->userTask = $userTask;
+        $this->taskUpdate = $taskUpdate;
     }
     /**
      * Display a listing of the resource.
@@ -49,7 +51,7 @@ class TaskController extends Controller
     {
         $attach = [];
         DB::beginTransaction();
-        // try {
+        try {
             $data = $request->all();
             $data['user_id'] = 1;
             $task = $this->task->create($data);
@@ -68,9 +70,10 @@ class TaskController extends Controller
             }
             DB::commit();
             return $data;
-        // } catch (\Exception $e) {
+        } catch (\Exception $e) {
             DB::rollback();
-        // }
+            return 'co loi xay ra';
+        }
     }
 
     /**
@@ -81,7 +84,7 @@ class TaskController extends Controller
      */
     public function show(Task $task)
     {
-        $task->load(['assignee.user', 'user', 'attachs']);
+        $task->load(['assignee.user', 'user', 'attachs', 'taskUpdates.user']);
         // dd($task);
         return view('tasks.detail')->with('task', $task);
     }
@@ -118,5 +121,40 @@ class TaskController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function updateProcess(Request $request)
+    {
+        // $data = $request->only(['process', 'message']);
+        $task = $this->task->find($request['task_id']);
+
+
+        try {
+            DB::beginTransaction();
+            $this->taskUpdate->create([
+                'user_id' => Auth::user()->id,
+                'new_process' => $request->process,
+                'old_process' => $task['process'],
+                'message' => $request->message,
+                'task_id' => $task['id'],
+            ]);
+            $task->update(['process' => $request['process']]);
+            if ($request->hasFile('attach')) {
+                $attach['name'] = $request->file('attach')->getClientOriginalName();
+                $attach['path'] = $request->file('attach')->hashName();
+                $attach['user_id'] = Auth::user()->id;
+                $attach['attachtable_id'] = $request['task_id'];
+                $attach['attachtable_type'] = 'tasks';
+                if (Storage::disk('local')->put('attachs', $request->attach)) {
+                    $this->attach->create($attach);
+                }
+            }
+
+            DB::commit();
+            return redirect(route('task.show', $request['task_id']));
+        } catch (\Exception $e) {
+            DB::rollback();
+            return $e;
+        }
     }
 }

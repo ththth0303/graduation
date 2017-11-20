@@ -31,4 +31,9 @@ class Task extends Model
     {
         return $this->hasMany(UserTask::class, 'task_id');
     }
+
+    public function taskUpdates()
+    {
+        return $this->hasMany(TaskUpdate::class, 'task_id');
+    }
 }

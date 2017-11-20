@@ -11,6 +11,10 @@ class AttachController extends Controller
         $headers = array(
               'Content-Type: application/*',
             );
-        return response()->download(storage_path("app/attachs/") . $name, $path, $headers);
+        if (file_exists(storage_path("app/attachs/") . $name)) {
+        	return response()->download(storage_path("app/attachs/") . $name, $path, $headers);
+        }
+
+        return 'File khong ton tai';
     }
 }

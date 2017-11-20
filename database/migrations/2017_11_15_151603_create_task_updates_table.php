@@ -16,10 +16,13 @@ class CreateTaskUpdatesTable extends Migration
         Schema::create('task_updates', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->unsigned();
-            $table->integer('message')->nullable();
-            $table->string('attach')->nullable();
+            $table->integer('task_id')->unsigned();
+            $table->text('message')->nullable();
+            $table->integer('new_process');
+            $table->integer('old_process');
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('task_id')->references('id')->on('tasks');
         });
     }
 

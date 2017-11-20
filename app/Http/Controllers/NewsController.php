@@ -3,9 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Document;
 
 class NewsController extends Controller
 {
+    public function __construct(Document $document)
+    {
+        $this->document = $document;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -13,7 +18,8 @@ class NewsController extends Controller
      */
     public function index()
     {
-        return view('news.index');
+        $news = $this->document->paginate(10);
+        return view('news.index')->with('news', $news);
     }
 
     /**
@@ -23,7 +29,7 @@ class NewsController extends Controller
      */
     public function create()
     {
-        //
+        return view('news.create');
     }
 
     /**
@@ -34,7 +40,16 @@ class NewsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if ($request->hasFile('attach')) {
+            $attach['name'] = $request->file('attach')->getClientOriginalName();
+            $attach['path'] = $request->file('attach')->hashName();
+            $attach['user_id'] = Auth::user()->id;
+            $attach['attachtable_id'] = Auth::user()->id;
+            $attach['attachtable_type'] = 'tasks';
+            if (Storage::disk('local')->put('attachs', $request->attach)) {
+                $this->attach->create($attach);
+            }
+        }
     }
 
     /**

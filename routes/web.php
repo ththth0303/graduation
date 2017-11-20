@@ -29,4 +29,5 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('user', 'UserController');
 
     Route::get('download/{name}/{path}', 'AttachController@download')->name('download_attach');
+    Route::post('update/task', 'TaskController@updateProcess')->name('update-task');
 });
