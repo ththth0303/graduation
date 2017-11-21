@@ -3,8 +3,24 @@
     <div class="col-sm-12" id="th">
         <div class="white-box">
             <a href="{{ route('task.create') }}"><div class="btn btn-danger">New</div></a>
-            
-            <div class="table-responsive">
+            <div class="sttabs tabs-style-linebox">
+            <nav>
+                <ul>
+                    <li class=""><a href="#section-linebox-5"><span>Tất cả</span></a>
+                    </li>
+                    <li class="tab-current"><a href="#section-linebox-4"><span>Đang làm</span></a>
+                    </li>
+                    <li class=""><a href="#section-linebox-2"><span>Đã hoàn thành</span></a>
+                    </li>
+                    <li class=""><a href="#section-linebox-3"><span>Trạng thái khác</span></a>
+                    </li>
+                    <li class=""><a href="#section-linebox-5"><span>Settings</span></a>
+                    </li>
+                </ul>
+            </nav>
+            <div class="content-wrap text-center">
+                <section id="section-linebox-2" class="content-current">
+                     <div class="table-responsive">
                 <table class="table">
                     <thead>
                         <tr>
@@ -53,64 +69,20 @@
                     </tbody>
                 </table>
             </div>
-        </div>
-        </div>
-        <div aria-hidden="true" aria-labelledby="myModalLabel" class="modal fade" id="create-task" role="dialog" style="display: none;" tabindex="-1">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button aria-hidden="true" class="close" data-dismiss="modal" type="button">×</button>
-                        <h4 class="modal-title">Thêm công việc</h4>
-                    </div>
-                    <div class="modal-body">
-                        <form>
-                            <div class="form-group">
-                                <label class="control-label" for="recipient-name">Tiêu đề</label>
-                                <input class="form-control" type="text" name="title">
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label" for="message-text">Nội dung:</label>
-                                <textarea class="form-control" id="message-text"></textarea>
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label" for="message-text">Thành viên:</label>
-                                <br>
-                                <label class="control-label" for="message-text">
-                                    <span class="btn btn-success btn-rounded ">anh thắng <a href="">X</a></span>
-                                </label>
-                                <input class="form-control" id="message-text">
-                                <ul class="basic-list">
-                                    <li>anh thắng</li>
-                                    <li>anh thắng</li>
-                                    <li>anh thắng</li>
-                                    <li>anh thắng</li>
-                                    <li>anh thắng</li>
-                                </ul>
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label" for="message-text">Đính kèm:</label>
-                                <div class="">
-                                    <div class="fileinput fileinput-new input-group" data-provides="fileinput">
-                                        <div class="form-control" data-trigger="fileinput"> <i class="glyphicon glyphicon-file fileinput-exists"></i> <span class="fileinput-filename"></span></div>
-                                        <span class="input-group-addon btn btn-default btn-file"> <span class="fileinput-new">Select file</span> <span class="fileinput-exists">Change</span>
-                                        <input type="file" name="...">
-                                        </span> <a href="#" class="input-group-addon btn btn-default fileinput-exists" data-dismiss="fileinput">Remove</a> </div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="input-daterange input-group" id="date-range">
-                                    <input type="text" class="form-control" name="start" id="date" />
-                                    <span class="input-group-addon bg-info b-0 text-white">to</span>
-                                    <input type="text" class="form-control" name="end" />
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button class="btn btn-default waves-effect" data-dismiss="modal" type="button">Close</button> <button class="btn btn-danger waves-effect waves-light" type="button">Save changes</button>
-                    </div>
-                </div>
+                </section>
+                <section id="section-linebox-3" class="">
+                    <h2>Tabbing 3</h2>
+                </section>
+                <section id="section-linebox-4" class="">
+                    <h2>Tabbing 4</h2>
+                </section>
+                <section id="section-linebox-5" class="">
+                    <h2>Tabbing 5</h2>
+                </section>
             </div>
+            <!-- /content -->
+        </div>  
+        </div>
         </div>
     </div>
 @endsection

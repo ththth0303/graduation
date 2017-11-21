@@ -3,13 +3,17 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Document;
+use Illuminate\Support\Facades\Storage;
+use App\News;
+use App\Attach;
+use Auth;
 
 class NewsController extends Controller
 {
-    public function __construct(Document $document)
+    public function __construct(News $news, Attach $attach)
     {
-        $this->document = $document;
+        $this->news = $news;
+        $this->attach = $attach;
     }
     /**
      * Display a listing of the resource.
@@ -18,7 +22,7 @@ class NewsController extends Controller
      */
     public function index()
     {
-        $news = $this->document->paginate(10);
+        $news = $this->news->with('user')->paginate(10);
         return view('news.index')->with('news', $news);
     }
 
@@ -40,16 +44,16 @@ class NewsController extends Controller
      */
     public function store(Request $request)
     {
+        $news = $request->all();
+        $news['user_id'] = Auth::user()->id;
         if ($request->hasFile('attach')) {
-            $attach['name'] = $request->file('attach')->getClientOriginalName();
-            $attach['path'] = $request->file('attach')->hashName();
-            $attach['user_id'] = Auth::user()->id;
-            $attach['attachtable_id'] = Auth::user()->id;
-            $attach['attachtable_type'] = 'tasks';
             if (Storage::disk('local')->put('attachs', $request->attach)) {
-                $this->attach->create($attach);
+                $news['attach'] = $request->attach->hashName();
+                $news['attach_name'] = $request->attach->getClientOriginalName();
             }
         }
+        // dd($news);
+        return $this->news->create($news);
     }
 
     /**
@@ -58,9 +62,9 @@ class NewsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(News $news)
     {
-        return view('news.detail');
+        return view('news.detail')->with('news', $news);
     }
 
     /**

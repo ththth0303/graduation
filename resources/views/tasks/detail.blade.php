@@ -38,7 +38,7 @@
                 <hr class="col-md-12">
                 <div class="col-md-12"><p><b>Attack: </b><br>
                     @foreach( $task->attachs as $attach)
-                    <a href="{{ route('download_attach', [$attach->name, $attach->path]) }}">{{ $attach->name }}</a> <br>
+                    <a href="{{ route('download_attach', [urlencode($attach->name), $attach->path]) }}">{{ $attach->name }}</a> <br>
                     @endforeach
                 </p></div>
                 <hr class="col-md-12">
