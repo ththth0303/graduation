@@ -1,8 +1,12 @@
 @extends('layouts.master') @section('content')
 <div class="col-sm-12">
+     @if(session('message'))
+        <p class="{{ session('message')['type'] ? 'btn-info' : 'btn-danger' }} text-center">{{ session('message')['message'] }}</p>
+    @endif
     <div class="white-box">
-        <h3 class="box-title m-b-0">Bordered Table</h3>
-        <p class="text-muted m-b-20">Add<code>.table-bordered</code>for borders on all sides of the table and cells.</p>
+        <a class="text-white" href="{{ route('student.create') }}">
+            <div class="btn btn-danger">New</div>
+        </a>
         <div class="table-responsive">
             <table class="table">
                 <thead>

@@ -2,7 +2,7 @@
 @section('content')
     <div class="col-sm-12" id="th">
         <div class="white-box col-md-6 col-md-offset-3">
-             <form class="form-horizontal" method="post" enctype="multipart/form-data" action="{{ route('news.store') }}">
+             <form class="form-horizontal" method="post" enctype="multipart/form-data" action="{{ route('document.store') }}">
             {{ csrf_field() }}
             <div class="form-group">
                 <label class="col-md-12">Tiêu đề</label>
@@ -11,9 +11,32 @@
                 </div>
             </div>
             <div class="form-group">
+                <label class="col-md-12">Loại</label>
+                <div class="col-md-12">
+                    <label class="radio-inline p-0">
+                        <div class="radio radio-info">
+                            <input type="radio" name="type" id="radio1" value="1" checked>
+                            <label for="radio1">All</label>
+                        </div>
+                    </label>
+                    <label class="radio-inline">
+                        <div class="radio radio-info">
+                            <input type="radio" name="type" id="radio2" value="2" checked>
+                            <label for="radio2">Giáo viên</label>
+                        </div>
+                    </label>
+                    <label class="radio-inline">
+                        <div class="radio radio-info">
+                            <input type="radio" name="type" id="radio3" value="3">
+                            <label for="radio3">Sinh viên</label>
+                        </div>
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
                 <label class="col-md-12" for="example-email">Nội dunng</label>
                 <div class="col-md-12">
-                    <textarea name="content" class="" id="content"></textarea> 
+                    <textarea name="description" class="" id="content"></textarea> 
                 </div>
             </div>
             <div class="form-group">
@@ -25,7 +48,6 @@
                         <input type="file" name="attach">
                         </span> <a href="#" class="input-group-addon btn btn-default fileinput-exists" data-dismiss="fileinput">Remove</a> </div>
                 </div>
-                <img id="output" width="100px" />
             </div>
             <div class="form-group" style="text-align: center;">
                 <button type="submit" class="btn btn-success waves-effect waves-light m-r-10">Submit</button>

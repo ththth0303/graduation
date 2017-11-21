@@ -1,7 +1,7 @@
 @extends('layouts.master') @section('content')
 <div class="col-sm-12">
     @if(session('message'))
-        <p class="btn-info text-center">{{ session('message') }}</p>
+        <p class="{{ session('message')['type'] ? 'btn-info' : 'btn-danger' }} text-center">{{ session('message')['message'] }}</p>
     @endif
     <div class="white-box">
         <a class="text-white" href="user/create">

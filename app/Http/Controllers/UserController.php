@@ -101,9 +101,11 @@ class UserController extends Controller
             }
         }
         if ($user->update($data)) {
-            $message = 'Chỉnh sửa thành công';
+            $message['message'] = trans('message.success_user');
+            $message['type'] = true;
         } else {
-            $message = 'Có lỗi xảy ra';
+            $message['message'] = trans('message.fail');
+            $message['type'] = false;
         }
         return redirect(route('user.index'))->with('message', $message);
     }

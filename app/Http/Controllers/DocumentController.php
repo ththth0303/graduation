@@ -23,7 +23,7 @@ class DocumentController extends Controller
      */
     public function create()
     {
-        //
+        return view('documents.create');
     }
 
     /**
@@ -34,7 +34,23 @@ class DocumentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $news = $request->all();
+        $news['user_id'] = Auth::user()->id;
+        if ($request->hasFile('attach')) {
+            if (Storage::disk('local')->put('attachs', $request->attach)) {
+                $news['attach'] = $request->attach->hashName();
+                $news['attach_name'] = $request->attach->getClientOriginalName();
+            }
+        }
+        try {
+            $this->news->create($news);
+            $message = 'Tọa mới thành công';
+
+        } catch (\Exception $e) {
+            $message = 'Có lỗi xảy ra';
+        }
+
+        return redirect(route('news.index'))->with('message', $message);
     }
 
     /**
