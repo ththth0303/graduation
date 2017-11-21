@@ -26,7 +26,7 @@
                     <span class="btn btn-success btn-rounded" v-for="user in selectUsers">@{{ user.name }} <span @click="deleteUser(user.id)" style="padding: 10px;">x</span></span>
                 </label>
                 <input type="hidden" v-bind:value="user.id" name="user[]" v-for="user in selectUsers">
-                <input class="form-control" id="message-text" @keyup="searchUsers">
+                <input class="form-control" id="message-text" @keyup="searchUsers" v-model="input">
                 <ul class="basic-list">
                     <li v-for="user in users" @click="addUser(user)">@{{ user.name }}</li>
                 </ul>
@@ -37,7 +37,7 @@
                     <div class="fileinput fileinput-new input-group" data-provides="fileinput">
                         <div class="form-control" data-trigger="fileinput"> <i class="glyphicon glyphicon-file fileinput-exists"></i> <span class="fileinput-filename"></span></div>
                         <span class="input-group-addon btn btn-default btn-file"> <span class="fileinput-new">Select file</span> <span class="fileinput-exists">Change</span>
-                        <input type="file" name="attach" @change="onFileChange">
+                        <input type="file" name="attach">
                         </span> <a href="#" class="input-group-addon btn btn-default fileinput-exists" data-dismiss="fileinput">Remove</a> </div>
                 </div>
             </div>
@@ -49,8 +49,10 @@
                     <input type="text" class="form-control" name="end_date" id="end-date"/>
                 </div>
             </div>
-            <button  class="btn btn-success waves-effect waves-light m-r-10" @click="createTask">Submit</button>
-            <button type="reset" class="btn btn-inverse waves-effect waves-light">Reset</button>
+            <div class="text-center">
+                <button  class="btn btn-success waves-effect waves-light m-r-10" type="submit">Submit</button>
+                <button type="reset" class="btn btn-inverse waves-effect waves-light">Reset</button>
+            </div>
         </form>
     </div>
 </div>
