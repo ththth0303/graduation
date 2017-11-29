@@ -16,9 +16,9 @@ class Activities extends Migration
         Schema::create('activities', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->unsigned();
-            $table->string('name');
-            $table->string('student');
-            $table->string('note');
+            $table->string('action');
+            $table->string('table');
+            $table->string('query');
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users');
         });

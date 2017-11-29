@@ -17,6 +17,7 @@ class RelationServiceProvider extends ServiceProvider
         Relation::morphMap([
             'tasks' => 'App\Task',
             'projects' => 'App\FinalYearProject',
+            'task_updates' => 'App\TaskUpdate',
         ]);
     }
 

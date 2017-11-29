@@ -130,6 +130,7 @@ class TaskController extends Controller
 
 
         try {
+            DB::connection()->enableQueryLog();
             DB::beginTransaction();
             $this->taskUpdate->create([
                 'user_id' => Auth::user()->id,
@@ -150,8 +151,9 @@ class TaskController extends Controller
                 }
             }
 
+            return  DB::getQueryLog();
             DB::commit();
-            return redirect(route('task.show', $request['task_id']));
+            // return redirect(route('task.show', $request['task_id']));
         } catch (\Exception $e) {
             DB::rollback();
             return $e;

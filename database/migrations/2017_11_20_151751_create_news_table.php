@@ -17,10 +17,11 @@ class CreateNewsTable extends Migration
             $table->increments('id');
             $table->string('title', 255);
             $table->text('content');
-            $table->integer('user_id');
+            $table->integer('user_id')->unsigned();
             $table->string('attach')->nullable();
             $table->string('attach_name')->nullable();
             $table->timestamps();
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 
