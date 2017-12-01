@@ -18,7 +18,7 @@ class User extends Authenticatable
         'name',
         'email',
         'degree',
-        'department',
+        'address',
         'birthday',
         'gender',
         'level',
@@ -58,5 +58,10 @@ class User extends Authenticatable
     public function activities()
     {
         return $this->hasMany(Activities::class, 'user_id');
+    }
+
+    public function degree()
+    {
+        return $this->hasOne(SelectOption::class, 'id', 'degree');
     }
 }

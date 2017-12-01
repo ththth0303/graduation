@@ -6,13 +6,15 @@ use Illuminate\Http\Request;
 use App\Http\Requests\StoreUserRequest;
 use Illuminate\Support\Facades\Storage;
 use App\User;
+use App\SelectOption;
 use Auth;
 
 class UserController extends Controller
 {
-    public function __construct(User $user)
+    public function __construct(User $user, SelectOption $selectOption)
     {
         $this->user = $user;
+        $this->selectOption = $selectOption;
     }
     /**
      * Display a listing of the resource.
@@ -21,7 +23,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = $this->user->paginate(10);
+        $users = $this->user->with('degree')->paginate(10);
+        // dd($users);
         return view('users.index')->with('users', $users);
     }
 
@@ -32,7 +35,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('users.create');
+        return view('users.create')->with('degrees', $this->selectOption->getByType('degree'));
     }
 
     /**
@@ -80,7 +83,8 @@ class UserController extends Controller
         // if (Auth::user()->level == config('permission.admin')) {
         //     $edit = 'disabled';
         // }
-        return view('users.edit')->with(['user'=> $user, 'edit' => $edit]);
+        $degrees = $this->selectOption->getByType('degree');
+        return view('users.edit')->with(['user' => $user, 'edit' => $edit, 'degrees' => $degrees]);
     }
 
     /**
@@ -90,7 +94,7 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(StoreUserRequest $request, User $user)
     {
         $data = $request->all();
         if ($request->hasFile('avatar')) {
@@ -118,13 +122,26 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try {
+            $this->user->destroy($id);
+            $message = "Xóa thành công";
+        } catch (\Exception $e) {
+            $message = "Có lỗi xảy ra";
+        }
+
+        return redirect(route('user.index'))->with('message', $message);
     }
 
-    public function search($name)
+    public function search($name, $type = null)
     {
         // return 'dfdf';
         // return $name;
-        return $this->user->select('name','id')->where('name', 'like', '%' . $name . '%' )->get();
+        $users = $this->user->select('name','id')->where('name', 'like', '%' . $name . '%' )->get();
+
+        if ($type == 'page') {
+            return view('users.index')->with('users', $users);
+        }
+
+        return $users;
     }
 }

@@ -1,11 +1,11 @@
 @extends('layouts.master') @section('content')
 <div class="col-sm-12">
     @if(session('message'))
-        <p class="{{ session('message')['type'] ? 'btn-info' : 'btn-danger' }} text-center">{{ session('message')['message'] }}</p>
+        <p class="{{ session('message')['type'] == true ? 'btn-info' : 'btn-danger' }} text-center">{{ session('message')['message'] }}</p>
     @endif
-    <div class="white-box">
+    <div class="white-box" id="user-list">
         <a class="text-white" href="user/create">
-            <div class="btn btn-danger">New</div>
+            <div class="btn btn-danger">Thêm mới</div>
         </a>
         <div class="table-responsive">
             <table class="table table-striped">
