@@ -13,7 +13,7 @@ class UpdateUserRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,16 @@ class UpdateUserRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name' => 'required',
+            'avatar' => 'image',
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'name.required' => 'Họ tên không được để trống',
+            'avatar.image' => 'Ảnh đại diện không đúng định dạng',
         ];
     }
 }

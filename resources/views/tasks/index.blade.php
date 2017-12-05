@@ -1,37 +1,23 @@
 @extends('layouts.master')
 @section('content')
     <div class="col-sm-12" id="th">
+        @if(session('message'))
+            <p class="{{ session('message')['type'] == true ? 'btn-info' : 'btn-danger' }} text-center">{{ session('message')['message'] }}</p>
+        @endif
         <div class="white-box">
             <a href="{{ route('task.create') }}"><div class="btn btn-danger">New</div></a>
-            <div class="sttabs tabs-style-linebox">
-            <nav>
-                <ul>
-                    <li class=""><a href="#section-linebox-5"><span>Tất cả</span></a>
-                    </li>
-                    <li class="tab-current"><a href="#section-linebox-4"><span>Đang làm</span></a>
-                    </li>
-                    <li class=""><a href="#section-linebox-2"><span>Đã hoàn thành</span></a>
-                    </li>
-                    <li class=""><a href="#section-linebox-3"><span>Trạng thái khác</span></a>
-                    </li>
-                    <li class=""><a href="#section-linebox-5"><span>Settings</span></a>
-                    </li>
-                </ul>
-            </nav>
-            <div class="content-wrap text-center">
-                <section id="section-linebox-2" class="content-current">
-                     <div class="table-responsive">
+                <div class="table-responsive">
                 <table class="table">
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th>Uu tien</th>
-                            <th>Tieu de</th>
-                            <th>Giao vien</th>
-                            <th>Ngay bat dau</th>
-                            <th>ngay ket thuc</th>
-                            <th class="col-sm-4">Tien trinh</th>
-                            <th>Hanh dong</th>
+                            <th class="col-md-1">Ưu tiên</th>
+                            <th class="col-md-3">Tiêu đề</th>
+                            <th class="col-md-2">Giáo viên</th>
+                            <th class="col-md-1">Ngày bắt đầu</th>
+                            <th class="col-md-1">Thời hạn</th>
+                            <th class="col-sm-4">Trạng thái</th>
+                            <th>Hành động</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -40,49 +26,42 @@
                             <td>{{ $task->id }}</td>
                             <td>
                                 @if($task->priority == 'nomal')
-                                De
+                                <span class="label label-success">Thấp</span>
                                 @elseif($task->priority == 'low')
-                                Trung binh
+                                <span class="label label-primary">Bình thường</span>
                                 @elseif($task->priority == 'hight')
-                                Cao
+                                <span class="label label-danger">Cao</span>
                                 @endif
                             </td>
-                            <td><a href="{{ route('task.show', $task->id) }}">{{ $task->title }}</a></td>
+                            <td ><a  style="text-overflow:ellipsis;" href="{{ route('task.show', $task->id) }}">{{ $task->title }}</a></td>
                             <td>
                                 @foreach($task->assignee as $assignee)
-                                <img src="{{ asset(config('path.avatar') . $assignee->avatar) }}" alt="">
-                                {{ $assignee->name }}
+                                <a target="blank" href="{{ route('user.show', $assignee->id) }}"><img class="img-circle" src="{{ asset(config('path.avatar') . $assignee->avatar) }}" width="30px" height="30px" data-toggle="tooltip" data-original-title="{{$assignee->name}}"></a>
                                 @endforeach
                             </td>
-                            <td>2/11/2017</td>
-                            <td>3/11/2017</td>
+                            <td>{{ $task->start_date }}</td>
+                            <td>{{ $task->end_date }}</td>
                             <td>
-                                <div class="progress progress-lg">
-                                    <div class="progress-bar progress-bar-success" role="progressbar" style="width: 20%;">
-                                        20%
+                                @if($task->process == 100)
+                                    <div class="label label-success">Hoàn thành</div>
+                                @else
+                                    <div class="progress progress-lg">
+                                        <div class="progress-bar progress-bar-success text-center" role="progressbar" style="width: {{  $task->process }}%;">
+                                            {{  $task->process }}%
+                                        </div>
                                     </div>
-                                </div>
+                                @endif
                             </td>
-                            <td><img alt="Update" class="model_img img-responsive" data-target="#responsive-modal" data-toggle="modal" src="../plugins/images/model.png"></td>
+                            <td class="text-nowrap">
+                                <a href="{{ route('task.edit', $task->id) }}" data-toggle="tooltip" data-original-title="Edit"> <i class="fa fa-pencil text-inverse m-r-10"></i> </a>
+                                <a href="#" data-toggle="tooltip" data-original-title="Close"> <i class="fa fa-close text-danger"></i> </a>
+                            </td>
                         </tr>
                     @endforeach
                     </tbody>
                 </table>
             </div>
-                </section>
-                <section id="section-linebox-3" class="">
-                    <h2>Tabbing 3</h2>
-                </section>
-                <section id="section-linebox-4" class="">
-                    <h2>Tabbing 4</h2>
-                </section>
-                <section id="section-linebox-5" class="">
-                    <h2>Tabbing 5</h2>
-                </section>
-            </div>
             <!-- /content -->
-        </div>  
-        </div>
         </div>
     </div>
 @endsection

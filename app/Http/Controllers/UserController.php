@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreUserRequest;
+use App\Http\Requests\UpdateUserRequest;
 use Illuminate\Support\Facades\Storage;
 use App\User;
 use App\SelectOption;
@@ -53,9 +54,11 @@ class UserController extends Controller
             $data['avatar'] = $request->avatar->hashName();
         }
         if (User::create($data)) {
-            $message = 'Tọa mới thành công';
+            $message['message'] = 'Tạo mới thành công';
+            $message['type'] = true;
         } else {
-            $message = 'Có lỗi xảy ra';
+            $message['message'] = 'Có lỗi xảy ra, tạo mới không thành công';
+            $message['type'] = false;
         }
         return redirect(route('user.index'))->with('message', $message);
     }
@@ -94,7 +97,7 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(StoreUserRequest $request, User $user)
+    public function update(UpdateUserRequest $request, User $user)
     {
         $data = $request->all();
         if ($request->hasFile('avatar')) {
@@ -105,7 +108,7 @@ class UserController extends Controller
             }
         }
         if ($user->update($data)) {
-            $message['message'] = trans('message.success_user');
+            $message['message'] = 'Chỉnh sửa thành công';
             $message['type'] = true;
         } else {
             $message['message'] = trans('message.fail');

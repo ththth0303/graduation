@@ -9,19 +9,19 @@
                     {{-- <div class="btn btn-danger col-md-1">Hoàn Thành</div> --}}
                 </div>
                 <div class="info">
-                    <p><b>Priority: </b>
+                    <p><b>Độ ưu tiên: </b>
                         @if($task->priority == 'nomal')
-                            De
+                        <span class="label label-success">Thấp</span>
                         @elseif($task->priority == 'low')
-                            Trung binh
+                        <span class="label label-primary">Bình thường</span>
                         @elseif($task->priority == 'hight')
-                            Cao
+                        <span class="label label-danger">Cao</span>
                         @endif
                     </p></div>
-                <div class="info"><p><b>Start date: </b>{{ $task->start_date }}</p></div>
-                <div class="info"><p><b>Due date: </b>{{ $task->end_date }}</p></div>
+                <div class="info"><p><b>Ngày bắt đầu: </b><span class="label label-success">{{ $task->start_date }}</span></p></div>
+                <div class="info"><p><b>Thời hạn: </b><span class="label label-success">{{ $task->end_date }}</span></p></div>
                 <div class="col-sm-12">
-                    <p class="col-md-2 status"><b>Status: </b></p>
+                    <p class="col-md-2 status"><b>Trạng thái: </b></p>
                     <div class="progress progress-lg col-md-6">
                         <div class="progress-bar progress-bar-success" role="progressbar" style="width: {{ $task->process }}%;">
                             {{ $task->process }}%
@@ -30,21 +30,21 @@
                 </div>
                 <hr>
                 <div class="col-md-12">
-                    <p><b>Assignee: </b>
+                    <p><b>Người thực hiện: </b>
                         @foreach($task->assignee as $assignee)
-                            <a href="">{{ $assignee->user->name }}</a>
+                            <a href=""><img class="img-circle" src="{{ asset(config('path.avatar') . $assignee->avatar) }}" width="30px" height="30px" data-toggle="tooltip" data-original-title="{{$assignee->name}}">{{ $assignee->name }}, </a>
                         @endforeach
                     </p></div>
                 <hr class="col-md-12">
-                <div class="col-md-12"><p><b>Attack: </b><br>
+                <div class="col-md-12"><p><b>Đính kèm: </b><br>
                     @foreach( $task->attachs as $attach)
                     <a href="{{ route('download_attach', [urlencode($attach->name), $attach->path]) }}">{{ $attach->name }}</a> <br>
                     @endforeach
                 </p></div>
                 <hr class="col-md-12">
-                <div class="col-md-12"><p><b>Description: </b>{{ $task->description }}</p></div>
+                <div class="col-md-12"><p><b>Nội dung: </b>{!! $task->content !!}</p></div>
                 <hr class="col-md-12">
-                <div class="col-md-12"><p><b>Messages: </b></p>
+                <div class="col-md-12"><p><b>Ghi chú: </b></p>
                     @foreach($task->taskUpdates as $update)
                         {{ $update->user->name }} change from {{ $update->old_process }} to {{ $update->new_process }} <br>
                     @endforeach
@@ -67,7 +67,7 @@
                             </div>
                             <div class="form-group">
                                 <label class="control-label" for="message-text">Ghi chú:</label>
-                                <textarea class="form-control" id="message-text" name="message"></textarea>
+                                <textarea class="form-control" id="message-text" name="message">{!! $task->content !!}</textarea>
                             </div>
                             <div class="form-group">
                                 <label class="control-label" for="message-text">Đính kèm:</label>

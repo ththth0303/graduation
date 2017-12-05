@@ -1,23 +1,24 @@
 @extends('layouts.master') @section('content')
 <div class="col-sm-12" id="create-task">
     <div class="white-box col-md-6 col-md-offset-3" >
-        <form class="form-horizontal" method="post" enctype="multipart/form-data" action="{{ route('task.store') }}">
+        <form class="form-horizontal" method="post" enctype="multipart/form-data" action="{{ route('task.update', $task->id) }}">
             {{ csrf_field() }}
+            {{ method_field('PUT') }}
             <div class="form-group">
                 <label class="control-label" for="recipient-name">Tiêu đề</label>
-                <input class="form-control" type="text" name="title">
+                <input class="form-control" type="text" name="title" value="{{ $task->title }}">
             </div>
             <div class="form-group">
                 <label class="control-label" for="message-text">Độ ưu tiên:</label>
                 <select name="priority" id="" class="form-control" >
-                    <option value="nomal">Bình thường</option>
-                    <option value="low">Thấp</option>
-                    <option value="hight">Cao</option>
+                    <option value="nomal" {{ $task->priority == 'nomal'? 'selected' : '' }}>Bình thường</option>
+                    <option value="low"  {{ $task->priority == 'low'? 'selected' : '' }}>Thấp</option>
+                    <option value="hight"  {{ $task->priority == 'hight'? 'selected' : '' }}>Cao</option>
                 </select>
             </div>
             <div class="form-group">
                 <label class="control-label" for="message-text">Nội dung:</label>
-                <textarea class="form-control" id="content" name="content"></textarea>
+                <textarea class="form-control" id="content" name="content">{{ $task->content }}</textarea>
             </div>
             <div class="form-group">
                 <label class="control-label" for="message-text">Thành viên:</label>
@@ -63,6 +64,9 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.2/moment-with-locales.min.js"></script>
 <script src="{{ asset('bower_components/bootstrap-daterangepicker/daterangepicker.js') }}"></script>
 <script src="{{ asset('js/tasks/task.js') }}"></script>
+<script type="text/javascript">
+    th.selectUsers = {!! $task->assignee !!}
+</script>
 <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css" rel="stylesheet">
 <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script>
 <script type="text/javascript">

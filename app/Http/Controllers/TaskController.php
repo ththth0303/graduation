@@ -49,15 +49,78 @@ class TaskController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request->all());
         $attach = [];
         DB::beginTransaction();
         try {
             $data = $request->all();
             $data['user_id'] = 1;
             $task = $this->task->create($data);
-            foreach ($request->user as $key => $value) {
-                $this->userTask->create(['user_id' => $value, 'task_id' => $task->id]);
+            $task->assignee()->attach($request->user);
+            if ($request->hasFile('attach')) {
+                $attach['name'] = $request->file('attach')->getClientOriginalName();
+                $attach['path'] = $request->file('attach')->hashName();
+                $attach['user_id'] = Auth::user()->id;
+                $attach['attachtable_id'] = Auth::user()->id;
+                $attach['attachtable_type'] = 'tasks';
+                if (Storage::disk('local')->put('attachs', $request->attach)) {
+                    $this->attach->create($attach);
+                }
             }
+           DB::commit();
+            $message['message'] = 'Tạo mới thành công';
+            $message['type'] = true;
+        } catch (\Exception $e) {
+            DB::rollback();
+            $message['message'] = 'Có lỗi xảy ra';
+            $message['type'] = false;
+        }
+
+        return redirect(route('task.index'))->with('message', $message);
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show(Task $task)
+    {
+        $task->load(['assignee', 'user', 'attachs', 'taskUpdates.user']);
+        // dd($task);
+
+        return view('tasks.detail')->with('task', $task);
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(Task $task)
+    {
+        $task->load(['assignee', 'user', 'attachs', 'taskUpdates.user']);
+        return view('tasks.edit')->with(['task' => $task]);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, Task $task)
+    {
+        $attach = [];
+        DB::beginTransaction();
+        try {
+            $data = $request->all();
+            $data['user_id'] = Auth::user()->id;
+            $task->update($data);
+            $task->assignee()->sync($request->user);
             if ($request->hasFile('attach')) {
                 $attach['name'] = $request->file('attach')->getClientOriginalName();
                 $attach['path'] = $request->file('attach')->hashName();
@@ -69,47 +132,15 @@ class TaskController extends Controller
                 }
             }
             DB::commit();
-            return $data;
+            $message['message'] = 'Chỉnh sửa thành công';
+            $message['type'] = true;
         } catch (\Exception $e) {
             DB::rollback();
-            return 'co loi xay ra';
+            $message['message'] = 'Có lỗi xảy ra, chỉnh sửa không thành công';
+            $message['type'] = false;
         }
-    }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Task $task)
-    {
-        $task->load(['assignee.user', 'user', 'attachs', 'taskUpdates.user']);
-        // dd($task);
-        return view('tasks.detail')->with('task', $task);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
+            return redirect(route('task.index'))->with('message', $message);
     }
 
     /**
@@ -127,8 +158,6 @@ class TaskController extends Controller
     {
         // $data = $request->only(['process', 'message']);
         $task = $this->task->find($request['task_id']);
-
-
         try {
             DB::connection()->enableQueryLog();
             DB::beginTransaction();
@@ -151,9 +180,8 @@ class TaskController extends Controller
                 }
             }
 
-            return  DB::getQueryLog();
             DB::commit();
-            // return redirect(route('task.show', $request['task_id']));
+            return redirect(route('task.show', $request['task_id']));
         } catch (\Exception $e) {
             DB::rollback();
             return $e;

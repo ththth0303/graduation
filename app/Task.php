@@ -27,13 +27,18 @@ class Task extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
-    public function assignee()
-    {
-        return $this->hasMany(UserTask::class, 'task_id');
-    }
+    // public function assignee()
+    // {
+    //     return $this->hasMany(UserTask::class, 'task_id');
+    // }
 
     public function taskUpdates()
     {
         return $this->hasMany(TaskUpdate::class, 'task_id');
+    }
+
+    public function assignee()
+    {
+        return $this->belongsToMany(User::class, 'user_tasks', 'task_id', 'user_id');
     }
 }
